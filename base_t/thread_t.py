@@ -1,38 +1,56 @@
-# 线程不安全，需要加锁
-# 加锁有两种方式
+import time
 
-import threading
-
-number = 0
-
-lock = threading.Lock()
+import requests
+from concurrent.futures import ThreadPoolExecutor, wait, ProcessPoolExecutor, as_completed
 
 
-def add_unsafe():
-    global number
-    for i in range(1000000):
-        number += 1
+def get_url(url):
+    res = requests.get(url)
+    time.sleep(1)
+    print("completed")
+    return res
 
 
-def add_safe():
-    global number
-    for i in range(1000000):
-        # lock.acquire()
-        with lock:
-            number += 1
-        # lock.release()
+def thread_test(urls):
+    time1 = time.time()
+    t = ThreadPoolExecutor(max_workers=2)
+    # with ThreadPoolExecutor(max_workers=2) as t:
+    tasks = []
+    for url in urls:
+        tasks.append(t.submit(get_url, url))
+    # wait(tasks)  # 等待所有任务完成
+    # as_completed 只要有任务完成就输出
+    # for future in as_completed(tasks):
+    #     data = future.result()
+    #     print("result %s" % data)
+    # for future in tasks:
+    #     print(future.done())
+
+    time2 = time.time()
+    print("thread pool cost %s" % (time2-time1))
 
 
-thread_1 = threading.Thread(target=add_safe)
-thread_2 = threading.Thread(target=add_safe)
+def process_test(urls):
+    time1 = time.time()
+    with ProcessPoolExecutor() as t:
+        tasks = []
+        for url in urls:
+            tasks.append(t.submit(get_url, url))
+        wait(tasks)
+    time2 = time.time()
+    print("thread pool cost %s" % (time2-time1))
 
-# thread_1 = threading.Thread(target=add_unsafe)
-# thread_2 = threading.Thread(target=add_unsafe)
 
-thread_1.start()
-thread_2.start()
+def sync_test(urls):
+    time1 = time.time()
+    for url in urls:
+        get_url(url)
+    time2 = time.time()
+    print("sync cost %s" % (time2 - time1))
 
-thread_1.join()
-thread_2.join()
 
-print(number)
+if __name__ == "__main__":
+    urls = ["https://www.baidu.com"] * 10
+    thread_test(urls)  # 0.35
+    # sync_test(urls)  # 11.54
+    print("over")
