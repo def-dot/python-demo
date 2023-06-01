@@ -18,7 +18,7 @@ def thread_test(urls):
     tasks = []
     for url in urls:
         tasks.append(t.submit(get_url, url))
-    # wait(tasks)  # 等待所有任务完成
+    wait(tasks)  # 等待所有任务完成
     # as_completed 只要有任务完成就输出
     # for future in as_completed(tasks):
     #     data = future.result()
@@ -38,7 +38,7 @@ def process_test(urls):
             tasks.append(t.submit(get_url, url))
         wait(tasks)
     time2 = time.time()
-    print("thread pool cost %s" % (time2-time1))
+    print("process pool cost %s" % (time2-time1))
 
 
 def sync_test(urls):
@@ -51,6 +51,7 @@ def sync_test(urls):
 
 if __name__ == "__main__":
     urls = ["https://www.baidu.com"] * 10
-    thread_test(urls)  # 0.35
+    # thread_test(urls)  # 0.35
+    process_test(urls)  # 2.43
     # sync_test(urls)  # 11.54
     print("over")
