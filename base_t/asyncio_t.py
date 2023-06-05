@@ -5,6 +5,7 @@ import asyncio
 a = [1] * 10000
 b = [2] * 10000
 
+
 def sync_t():
     time1 = datetime.datetime.now()
     for i in range(len(a)):
@@ -12,8 +13,10 @@ def sync_t():
     time2 = datetime.datetime.now()
     print((time2 - time1).microseconds)
 
+
 async def print_t(i):
     print(a[i] + b[i])
+
 
 def async_t():
     tasks = []
@@ -26,9 +29,11 @@ def async_t():
     time2 = datetime.datetime.now()
     print((time2 - time1).microseconds)
 
+
 async def coroutine_t(delay, message):
     await asyncio.sleep(delay)
     print(message)
+
 
 async def exec_coroutine_t():
     t1 = datetime.datetime.now()
@@ -36,6 +41,7 @@ async def exec_coroutine_t():
     await coroutine_t(2, "world")
     t2 = datetime.datetime.now()
     print("cost ", (t2-t1).seconds)
+
 
 async def parallel_coroutine_t():
     t1 = datetime.datetime.now()

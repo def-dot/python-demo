@@ -82,7 +82,3 @@ if __name__ == '__main__':
     asyncGetPing(ips)
     time2 = time.time()
     print("cost %s" % (time2 - time1))
-
-
-
-
