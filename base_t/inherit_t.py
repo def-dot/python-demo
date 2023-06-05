@@ -50,9 +50,11 @@ def mro_t():
     o.display()
 
 
-def mro_t2():
+def mixin_t():
+    # mixin 混入，实际上是继承，依赖MRO链，可以调用上层方法（某种情况下，类本身没有直接继承上层方法，所以本身无法调用）
     class A:
         def display(self):
+            super().display()
             print('A')
 
     class B(A):
@@ -62,7 +64,6 @@ def mro_t2():
 
     class C:
         def display(self):
-            super().display()
             print('C')
 
     class D(B, C):
@@ -79,7 +80,6 @@ def mro_t2():
     # L(B) = B + merge(L(A), A) => L(B) = B + merge((A, OBJECT), A) => L(B) = B + A + OBJECT
     # L(C) = C
     # L(A) = A + merge(L(OBJECT), OBJECT)  => L(A) = A + OBJECT
-
     print(D.mro())
     o = D()
     o.display()
@@ -88,5 +88,4 @@ def mro_t2():
 if __name__ == "__main__":
     # self_t()
     # mro_t()
-    mro_t2()
-
+    mixin_t()

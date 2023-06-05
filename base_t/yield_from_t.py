@@ -2,35 +2,28 @@
 import asyncio
 
 
-def gen_from_iter():
-    # 从迭代器生成,，如数组、元组、字典等
-    arr = [1, 2, 3]
-    yield from arr
+def yield_from_t():
+    def gen():
+        arr = [1, 2, 3]
+        for i in arr:
+            if i == 2:
+                return i
+            else:
+                yield i
 
+    def gen_from():
+        # 生成器中return,只能通过捕获StopIteration异常实现
+        # yield from 能够接收return值,而yield不能
+        res = yield from gen()
+        print("res %s" % res)
 
-def gen():
-    arr = [1, 2, 3]
-    for i in arr:
-        yield i
+    print("yield ----------")
+    for i in gen():
+        print(i)
 
-
-def gen_return():
-    for i in range(5):
-        if i == 2:
-            return i
-        else:
-            yield i
-
-
-def gen_from_gen():
-    # 从生成器生成，和直接从生成器生成没啥区别
-    yield from gen()
-
-
-def yield_from_return_t():
-    # 通过yield from接收return值
-    res = yield from gen_return()
-    print("res %s" % res)
+    print("yield from ----------")
+    for i in gen_from():
+        print(i)
 
 
 @asyncio.coroutine
@@ -69,27 +62,12 @@ def async_as_completed():
         print("res %s" % res)
 
 
-@asyncio.coroutine
-def async_main():
-    # 协程中没有yield，不会报错
-    # yield from async_wait()
-    yield from async_as_completed()
-
-
-@asyncio.coroutine
-def async_coroutine_t():
-    # yield from async_wait()
-    return 1
-
-
 if __name__ == "__main__":
-    # for i in gen():
-    #     print(i)
-    # for i in gen_from_gen():
-    #     print(i)
+    yield_from_t()
 
-    # for i in yield_from_return_t():
-    #     print(i)
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(async_main())
+    loop.run_until_complete(async_as_completed())
+    loop.run_until_complete(async_wait())
     loop.close()
+
+
