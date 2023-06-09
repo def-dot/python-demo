@@ -1,7 +1,7 @@
 import sys
 import datetime
+from decimal import Decimal
 
-from numpy import core
 
 '''
 占用空间解释
@@ -116,7 +116,7 @@ def type_convert_t():
 
 
 def float_t():
-    # float精度丢失问题；round不准确问题；格式化输出
+    # float精度丢失问题；round不准确问题；format格式化输出也是不准确的（round和format逻辑一致，四舍五入位是5时不准确，但不清楚逻辑是什么）；
     a = 0.1
     b = 0.2
     print(f"flat a {a}")
@@ -127,12 +127,40 @@ def float_t():
     b = 2.5
     print(f"round a {a} {round(a)}")  # 2
     print(f"round b {b} {round(b)}")  # 2
+    a = 2.15
+    b = 2.25
+    c = 2.35
+    print(f"round a {a} {round(a, 1)}")  # 2.1 ?
+    print(f"round b {b} {round(b, 1)}")  # 2.2 ?
+    print(f"round c {c} {round(c, 1)}")  # 2.4
     c = 1.4
     print(f"round c {c} {round(c)}")  # 1
+    # format
+    a = 1.15
+    print("format {:.1f}".format(a))
+    a = 1.16
+    print("format {:.1f}".format(a))
+    a = 3.14159
+    print("format {:.3f}".format(a))
+    a = 3.14159
+    print(f"round a {a} {round(a, 3)}")  # 1
+
+
+def decimal_t():
+    a = 0.1
+    b = 0.2
+    print(f"flat a {a}")
+    print(f"flat b {b}")
+    print(f"float 计算 {a + b}")  # 0.30000000000000004
+    a = Decimal(str(a))
+    b = Decimal(str(b))
+    c = a + b
+    print(f"decimal 计算 {c} {type(c)}")  # 0.3
 
 
 if __name__ == "__main__":
     # size_t()
     # type_t()
     # type_convert_t()
-    float_t()
+    # float_t()
+    decimal_t()
