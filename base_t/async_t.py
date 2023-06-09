@@ -89,8 +89,19 @@ def done_t():
     loop.run_until_complete(run())
 
 
+def await_sync_t():
+    async def sleep_t():
+        # await 接同步代码测试
+        time.sleep(1)
+        print("over")
+
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(sleep_t())
+
+
 if __name__ == '__main__':
     # sync_t()  # 155.41
     # async_t()  # 0.15
     # done_t()
-    async_gather_t()
+    # async_gather_t()
+    await_sync_t()
