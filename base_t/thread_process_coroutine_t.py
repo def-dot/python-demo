@@ -1,5 +1,7 @@
 # 多进程要快于多线程?
 import asyncio
+import time
+
 import aiohttp
 import requests
 from concurrent.futures import ThreadPoolExecutor, wait, ProcessPoolExecutor, as_completed
@@ -73,10 +75,36 @@ def async_t(urls):
     # asyncio.run(get_urls(urls))
 
 
+def rw_file(input):
+    print(input)
+    with open('t.txt', 'a+') as f:
+        if input == '*':
+            time.sleep(1)
+        for i in range(10):
+            f.write(input)
+            time.sleep(0.1)
+    return input
+
+
+def process_rw_file():
+    # 多进程读写一个文件
+    t = ProcessPoolExecutor()
+    tasks = []
+    tasks.append(t.submit(rw_file, "*"))
+    # time.sleep(1)
+    tasks.append(t.submit(rw_file, "#"))
+    done, pending = wait(tasks)  # 等待所有任务完成
+    print('over')
+    for i in done:
+        print("result " + i.result())
+        pass
+
+
 if __name__ == "__main__":
     urls = ["https://www.baidu.com"] * 20000
     # thread_t(urls)  # 2.22
     # thread_as_completed_t(urls)
     # process_t(urls)  # 1.16
     # sync_t(urls)  # 11.76
-    async_t(urls)  # (100 0.18)  (10000 3.85) (20000 8.08)
+    # async_t(urls)  # (100 0.18)  (10000 3.85) (20000 8.08)
+    process_rw_file()
