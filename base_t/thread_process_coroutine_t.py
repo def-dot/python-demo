@@ -1,5 +1,6 @@
 # 多进程要快于多线程?
 import asyncio
+import os
 import time
 
 import aiohttp
@@ -76,11 +77,11 @@ def async_t(urls):
 
 
 def rw_file(input):
-    print(input)
+    print(f" {input} {os.getpid()}")
     with open('t.txt', 'a+') as f:
-        if input == '*':
-            time.sleep(1)
         for i in range(10):
+            if input == '*' and i == 5:
+                time.sleep(1)
             f.write(input)
             time.sleep(0.1)
     return input
