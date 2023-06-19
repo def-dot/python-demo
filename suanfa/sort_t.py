@@ -44,6 +44,12 @@ def dac_t(nums):
     return res
 
 
+def quick_t(nums):
+    # 快速排序
+    # refer:https://blog.csdn.net/qq_40941722/article/details/94396010
+    pass
+
+
 if __name__ == "__main__":
     nums = [6, 1, 3, 4, 9]
     r = dac_t(nums)
