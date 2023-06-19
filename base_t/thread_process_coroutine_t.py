@@ -107,5 +107,5 @@ if __name__ == "__main__":
     # thread_as_completed_t(urls)
     # process_t(urls)  # 1.16
     # sync_t(urls)  # 11.76
-    # async_t(urls)  # (100 0.18)  (10000 3.85) (20000 8.08)
-    process_rw_file()
+    async_t(urls)  # (100 0.18)  (10000 3.85) (20000 8.08)
+    # process_rw_file()
