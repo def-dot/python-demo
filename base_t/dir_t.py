@@ -39,6 +39,40 @@ def dict_t():
     print(f"dict s {s.__dict__}")
 
 
+def dir_t2():
+    class T:
+        def __init__(self):
+            self.name = 1
+
+        def func_i(self):
+            return 1
+
+        @classmethod
+        def func_c(cls):
+            return 1
+
+    print(dir(T))
+    dir_t = ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__',
+             '__getattribute__',
+             '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__',
+             '__new__',
+             '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__',
+             '__weakref__', 'test']
+    print(f"__class__ {T.__class__}")  # 类的父类是type（元类）
+    print(f"__class__ {T().__class__}")  # 实例的父类是class（类）
+    print(f"__doc__ {T.__doc__}")
+    print(f"__dict__ {T.__dict__}")
+    print(f"__getattribute__ {T.__getattribute__}")  # __getattribute__(self, *args)
+    print(f"__delattr__ {T.__delattr__}")  # __delattr__(self, *args)
+    print(f"__setattr__ {T.__setattr__}")  # __setattr__(self, *args)
+    print(f"__dir__ {T.__dir__}")  # __dir__(self, *args)
+    print(f"__eq__ __ge__ __le__ __lt__ __gt__ __ne__ {T.__eq__}")  # __eq__(self, *args)
+    print(f"func_i {T.func_i()}")  # func_i()
+    print(f"func_c {T.func_c()}")  # func_c()
+    # d = {'__module__': '__main__', '__init__': <function T.__init__ at 0x000001F946482940>, 'test': <function T.test at 0x000001F946482A60>, '__dict__': <attribute '__dict__' of 'T' objects>, '__weakref__': <attribute '__weakref__' of 'T' objects>, '__doc__': None}
+
+
 if __name__ == "__main__":
     dir_t()
     dict_t()
+    dir_t2()
