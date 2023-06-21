@@ -1,3 +1,5 @@
+# 排序算法常用的有十种
+
 def maopao_t(nums):
     # 冒泡
     for i in range(len(nums)):

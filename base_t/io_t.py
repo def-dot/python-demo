@@ -17,7 +17,6 @@ def io_t2():
     print(f"t2 {threading.currentThread().ident} completed, {time.time()}")
 
 
-
 if __name__ == "__main__":
     t1 = threading.Thread(target=io_t1)
     t1.start()

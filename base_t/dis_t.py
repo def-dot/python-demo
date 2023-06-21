@@ -15,4 +15,4 @@ def foo():
     lst.sort()
 
 
-dis.dis(foo)
+dis.dis(foo)  # list原子性理解
