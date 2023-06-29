@@ -29,8 +29,14 @@ def IPSplitBlocks(ip2ip_str):
     return a
 
 
+def check_range(i):
+    # 判断是否同一IP范围
+    r = IPy.IP(i)
+    print(r)
+
+
 if __name__ == "__main__":
     # check_ip(ip="127.0.0.258")
-    r = IPSplitBlocks("172.16.0.0/24")
-    print(len(r))
-    print(r)
+    # r = IPSplitBlocks("172.16.0.0/24")
+    # print(r)
+    check_range("172.16.0.0/16")

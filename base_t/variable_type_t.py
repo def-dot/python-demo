@@ -158,9 +158,21 @@ def decimal_t():
     print(f"decimal 计算 {c} {type(c)}")  # 0.3
 
 
+def ord_t():
+    # 返回单个字符的unicode值
+    r = ord('a')
+    print(f"ord a {r}")  # 97
+    r = ord('汉')  # error, string of length 3 found
+    print(f"ord 汉 {r}")
+    print(f"len 汉 {len('汉')}")
+    r = ord('123')  # error, string of length 3 found
+    print(f"ord 123 {r}")
+
+
 if __name__ == "__main__":
     # size_t()
     # type_t()
     # type_convert_t()
     # float_t()
-    decimal_t()
+    # decimal_t()
+    ord_t()

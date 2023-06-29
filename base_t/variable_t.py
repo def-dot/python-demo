@@ -78,6 +78,29 @@ def refer_t():
     param_t(a)
 
 
+def str_t():
+    # 拼接是一样的，指向同样的地址空间
+    a = "hello_world"
+    print(f"a {id(a)}")
+    b = "hello_world"
+    print(f"b {id(b)}")
+    c = "hello" + "_" + "world"
+    print(f"c {id(c)}")
+
+
+def dict_t():
+    class DictT(dict):
+        def get(self, *args, **kwargs):
+            return 3
+        def __getattr__(self, item):
+            return 2
+
+    v = DictT()
+    v["a"] = 1
+    print(v.get('a'))
+    print(v['a'])
+
+
 def thread_t():
     t = ThreadPoolExecutor()  # 线程共用资源空间地址
     t.submit(refer_t)
@@ -178,8 +201,10 @@ class TimeT:
 if __name__ == "__main__":
     # value_t()
     # DictT().test()
-    private_t()
-    TimeT().test()
+    # private_t()
+    # TimeT().test()
     # refer_t()
     # thread_t()
     # time.sleep(5)
+    # str_t()
+    dict_t()
