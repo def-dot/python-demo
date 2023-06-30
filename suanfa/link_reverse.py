@@ -8,7 +8,6 @@ class ListNode:
 
 class Solution:
     def ReverseList(self, head: ListNode) -> ListNode:
-        # write code here
         res = None
         while head is not None:
             temp = head.next
