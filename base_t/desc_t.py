@@ -1,4 +1,5 @@
 # 描述符,定义了__get__ __set__ __del__任一个的类
+# 描述符其实是把属性的值委托给一个描述符类方法__get__ __set__，可以做属性值校验，或者返回处理后的属性值
 
 
 class Desc:
@@ -42,7 +43,184 @@ def class_obj_attr_t():
     print(t.a)
 
 
+def attr_get_t():
+    # 描述符，返回处理后的值10
+    class Desc:
+        def __get__(self, instance, owner):
+            return 10
+
+    class T:
+        a = Desc()
+    print(f"T.a {T.a}")
+    t = T()
+    print(f"t.a {t.a}")
+
+
+def attr_get_set_t():
+    # 描述符，返回处理后的值10
+    class Desc:
+        def __init__(self, value=20):
+            self.value = value
+
+        def __get__(self, instance, owner):
+            print('__get__')
+            return self.value
+
+        def __set__(self, instance, value):
+            print('__set__')
+            if value < 0:
+                raise ValueError("必须大于或等于0")
+            self.value = value
+
+    class T:
+        a = Desc()
+    t = T()
+    print(f"t.a {t.a}")
+    t.a = 35
+    print(f"T.a {T.a}")
+    t.a = -1
+    print(f"T.a {t.a}")
+
+
+def attr_return_t():
+    # 描述符，根据条件，返回特定值
+    class Desc:
+        def __init__(self, num):
+            self.num = num
+
+        def __get__(self, instance, owner):
+            if self.num == 1:
+                return "apple"
+            elif self.num == 2:
+                return "banana"
+            else:
+                return "other"
+
+    class T:
+        a = Desc(4)
+
+    print(T.a)
+
+
+def attr_order_t():
+    # 属性取值方法：__getattribute__
+    # 非描述符 实例属性 > 类属性
+    # 数据描述符__get__优先实例属性(__dict__不会包括数据描述符属性)
+    # 实例属性优先非数据描述符__get__(__dict__会包括实例属性)
+    class Desc:
+        def __init__(self):
+            self.value = 3
+
+        def __get__(self, instance, owner):
+            print('__get__')
+            # return self.value
+            return self.value
+
+        # def __set__(self, instance, value):
+        #     print('__set__')
+        #     self.value = value + 1
+
+    class T:
+        # a = 2
+        a = Desc()  # 描述符
+
+        def __init__(self):
+            self.a = 1
+
+        def __getattribute__(self, item):
+            print('__getattribute__')
+            return super().__getattribute__(item)
+
+    # print(T.__dict__)
+    t = T()
+    print(f't.__dict__ {t.__dict__}')  # __dict__也会调用__getattribute__，估计是在这里面赋值给__dict__
+    print(t.a)
+    print(T.a)
+
+
+def func_t():
+    # 函数中包括__get__方法，所以所有的函数都是非数据描述符
+    def foo():
+        pass
+    # ['__annotations__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__',
+    # '__get__', '__getattribute__', '__globals__', '__gt__', '__ha
+    # sh__', '__init__', '__init_subclass__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subcl
+    # asshook__']
+    # print(dir(foo))
+
+    class T:
+        def f(self):
+            pass
+
+        def __init__(self):
+            self.f = 2
+
+    t = T()
+    print(t.f)  # 实例优先 2
+
+
+def validate_t():
+    class Validate:
+        def __init__(self):
+            self.val = None
+
+        def __get__(self, instance, owner):
+            return self.val
+
+        def __set__(self, instance, value):
+            if self.valid(value):
+                self.val = value
+            else:
+                raise ValueError
+
+        def valid(self, value):
+            pass
+
+    class Num(Validate):
+        def __init__(self, min, max):
+            super().__init__()
+            self.min = min
+            self.max = max
+
+        def valid(self, value):
+            if isinstance(value, int) and self.min <= value <= self.max:
+                return True
+            else:
+                return False
+
+    class Str(Validate):
+        def __init__(self, min_len, max_len):
+            super().__init__()
+            self.min_len = min_len
+            self.max_len = max_len
+
+        def valid(self, value):
+            if isinstance(value, str) and self.min_len <= len(value) <= self.max_len:
+                return True
+            else:
+                return False
+
+    class T:
+        a = Num(min=1, max=100)
+        b = Str(min_len=3, max_len=20)
+
+        def __init__(self, a, b):
+            self.a = a
+            self.b = b
+
+    t = T(20, 'Bccc')
+    print(t.a)
+    print(t.b)
+
+
 if __name__ == '__main__':
     # class_attr_t()
     # obj_attr_t()
-    class_obj_attr_t()
+    # class_obj_attr_t()
+    # desc_t()
+    # attr_return_t()
+    # attr_get_set_t()
+    # attr_order_t()
+    # func_t()
+    validate_t()
+
