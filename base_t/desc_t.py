@@ -1,5 +1,6 @@
 # 描述符,定义了__get__ __set__ __del__任一个的类
 # 描述符其实是把属性的值委托给一个描述符类方法__get__ __set__，可以做属性值校验，或者返回处理后的属性值
+import random
 
 
 class Desc:
@@ -160,6 +161,7 @@ def func_t():
 
 
 def validate_t():
+    # 描述符用来做属性校验
     class Validate:
         def __init__(self):
             self.val = None
@@ -213,6 +215,31 @@ def validate_t():
     print(t.b)
 
 
+def decor_t():
+    # 描述符用来做装饰器
+    class mystaticmethod:
+        def __init__(self, func):
+            self.func = func
+
+        def __get__(self, instance, owner):
+            def f():
+                return "haha"
+            print(f'__get__')
+            return f
+
+    class T:
+        @mystaticmethod  # foo=staticmethod(foo)
+        def foo():
+            return 1
+
+        def __str__(self):
+            return "haha"
+
+    r = T.foo
+    print(r)
+    print(r())
+
+
 if __name__ == '__main__':
     # class_attr_t()
     # obj_attr_t()
@@ -222,5 +249,6 @@ if __name__ == '__main__':
     # attr_get_set_t()
     # attr_order_t()
     # func_t()
-    validate_t()
+    # validate_t()
+    decor_t()
 
