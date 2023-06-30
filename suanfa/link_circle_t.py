@@ -1,33 +1,32 @@
-# 环形链表判断
-# https://leetcode.cn/problems/linked-list-cycle/
+# 判断链表是否有环
+import time
 
 
-class Link:
-    def __init__(self, data, next=None):
-        self.data = data
-        self.next = next
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 
-def print_link(node):
-    while node:
-        print(node.data)
-        node = node.next
+class Solution:
+    def check(self, head: ListNode) -> bool:
+        existed = []
+        while head:
+            if head in existed:
+                return True
+            existed.append(head)
+            head = head.next
+        return False
 
 
-def circle(node):
-    # hash
-    ht = {}
-    while node:
-        if node in ht:
-            return True
-        ht[node] = True
-        node = node.next
-    return False
+if __name__ == "__main__":
+    node = ListNode(1)
+    head = node
 
+    node.next = ListNode(5)
+    node = node.next
 
-if __name__ == '__main__':
-    link2 = Link(2)
-    link1 = Link(1, link2)
-    link2.next = link1
-    res = circle(link1)
-    print(res)
+    # node.next = head
+
+    r = Solution().check(head)
+    print(r)
