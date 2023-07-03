@@ -45,17 +45,17 @@ if __name__ == "__main__":
     node = ListNode(1)
     head = node
 
-    # node.next = ListNode(2)
-    # node = node.next
-    #
-    # # node.next = ListNode(3)
-    # # node = node.next
-    #
-    # node.next = ListNode(2)
-    # node = node.next
-    #
-    # node.next = ListNode(1)
-    # node = node.next
+    node.next = ListNode(2)
+    node = node.next
+
+    node.next = ListNode(3)
+    node = node.next
+
+    node.next = ListNode(2)
+    node = node.next
+
+    node.next = ListNode(1)
+    node = node.next
 
     r = Solution().force(head)
     print(r)
