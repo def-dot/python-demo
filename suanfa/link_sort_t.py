@@ -51,9 +51,6 @@ class Solution:
         res = divide(head)
         return res
 
-    def ttt(self):
-        pass
-
 
 if __name__ == "__main__":
     node = ListNode(1)
