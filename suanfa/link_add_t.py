@@ -40,8 +40,8 @@ class Solution:
 
     def optimize(self, head1: ListNode, head2: ListNode) -> ListNode:
         # 1 5 3  +  1 9 ->  1 7 2
-        r = ListNode(-1)
-        p = r
+        res = ListNode(-1)
+        p = res
         head1 = self._reverse(head1)
         head2 = self._reverse(head2)
         pre_carry = 0
@@ -56,33 +56,35 @@ class Solution:
                 pre_carry = 0
             p.next = ListNode(r)
             p = p.next
-            head1 = head1.next
-            head2 = head2.next
+            if head1:
+                head1 = head1.next
+            if head2:
+                head2 = head2.next
 
-        r = r.next
-        r = self._reverse(r)
-        return r
+        if pre_carry == 1:
+            p.next = ListNode(pre_carry)
+        res = res.next
+        res = self._reverse(res)
+        return res
 
 
 if __name__ == "__main__":
-    node = ListNode(1)
+    node = ListNode(9)
     head = node
-
-    node.next = ListNode(5)
-    node = node.next
 
     node.next = ListNode(3)
     node = node.next
 
-    node = ListNode(1)
+    node.next = ListNode(7)
+    node = node.next
+
+    node = ListNode(6)
     head2 = node
 
-    node.next = ListNode(9)
+    node.next = ListNode(3)
     node = node.next
 
     r = Solution().force(head, head2)
     while r:
         print(r.val)
         r = r.next
-
-
