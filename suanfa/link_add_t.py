@@ -1,4 +1,5 @@
 # 两个链表，每个节点的值在0-9，计算两个链表相加的值，返回新的链表
+# 反序各个节点相加，注意进位，结果反序输出
 
 
 class ListNode:
@@ -27,6 +28,41 @@ class Solution:
             head = head.next
         return root.next
 
+    def _reverse(self, head: ListNode) -> ListNode:
+        # 反转
+        res = None
+        while head:
+            t = head.next
+            head.next = res
+            res = head
+            head = t
+        return res
+
+    def optimize(self, head1: ListNode, head2: ListNode) -> ListNode:
+        # 1 5 3  +  1 9 ->  1 7 2
+        r = ListNode(-1)
+        p = r
+        head1 = self._reverse(head1)
+        head2 = self._reverse(head2)
+        pre_carry = 0
+        while head1 or head2:
+            v1 = head1.val if head1 else 0
+            v2 = head2.val if head2 else 0
+            r = v1 + v2 + pre_carry
+            if r >= 10:
+                r = r % 10
+                pre_carry = 1
+            else:
+                pre_carry = 0
+            p.next = ListNode(r)
+            p = p.next
+            head1 = head1.next
+            head2 = head2.next
+
+        r = r.next
+        r = self._reverse(r)
+        return r
+
 
 if __name__ == "__main__":
     node = ListNode(1)
@@ -48,4 +84,5 @@ if __name__ == "__main__":
     while r:
         print(r.val)
         r = r.next
+
 
