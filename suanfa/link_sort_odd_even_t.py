@@ -3,31 +3,6 @@ class ListNode:
         self.val = x
         self.next = None
 
-class Solution:
-    def oddEvenList(self , head: ListNode) -> ListNode:
-         #如果链表为空，不用重排
-        if head == None:
-            return head
-        #even开头指向第二个节点，可能为空
-        even = head.next
-        #odd开头指向第一个节点
-        odd = head
-        #指向even开头
-        evenhead = even
-         # 1 3 2 4
-        while even and even.next:
-            #odd连接even的后一个，即奇数位
-            odd.next = even.next
-            #odd进入后一个奇数位
-            odd = odd.next
-            #even连接后一个奇数的后一位，即偶数位
-            even.next = odd.next
-            #even进入后一个偶数位
-            even = even.next
-        #even整体接在odd后面
-        odd.next = evenhead
-        return head
-
 
 class Solution:
     def force(self, head: ListNode) -> ListNode:
