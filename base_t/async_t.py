@@ -1,6 +1,7 @@
 # 计算密集型,同步/异步差别不大,同步甚至更快
 # IO密集型,异步远快于同步
 import asyncio
+import random
 import time
 
 from common import cost
@@ -99,9 +100,51 @@ def await_sync_t():
     loop.run_until_complete(sleep_t())
 
 
+def queue_t():
+    async def work(i, queue):
+        while True:
+            v = await queue.get()
+            await asyncio.sleep(v)
+            queue.task_done()
+            print(f"worker {i} sleep {v}")
+
+    async def main():
+        queue = asyncio.Queue()
+        # 100个消息
+        for i in range(100):
+            sleep_time = random.uniform(0.1, 1)
+            queue.put_nowait(sleep_time)
+
+        # 三个消费者
+        tasks = []
+        t = asyncio.create_task(work(1, queue))
+        tasks.append(t)
+        t = asyncio.create_task(work(2, queue))
+        tasks.append(t)
+        t = asyncio.create_task(work(3, queue))
+        tasks.append(t)
+
+        start_time = time.monotonic()
+        await queue.join()
+        end_time = time.monotonic()
+        print(f"cost {end_time-start_time}")
+
+        for t in tasks:
+            t.cancel()
+
+    asyncio.run(main())
+
+
+def subprocess_t():
+    async def main():
+        asyncio.create_subprocess_shell('python -c "import datetime;print(datetime.datetime.now())"', )
+    pass
+
+
 if __name__ == '__main__':
     # sync_t()  # 155.41
     # async_t()  # 0.15
     # done_t()
     # async_gather_t()
-    await_sync_t()
+    # await_sync_t()
+    queue_t()
