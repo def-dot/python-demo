@@ -242,15 +242,26 @@ def decor_t():
     print(r())
 
 
+def set_name_t():
+    class Desc:
+        def __set_name__(self, owner, name):
+            print(f"__set_name__ owner {owner} name {name}")
+
+    class T:
+        d = Desc()
+
+
 if __name__ == '__main__':
     # class_attr_t()
     # obj_attr_t()
     # class_obj_attr_t()
     # desc_t()
     # attr_return_t()
-    attr_get_set_t()
+    # attr_get_set_t()
     # attr_order_t()
     # func_t()
     # validate_t()
     # decor_t()
+    set_name_t()
+
 
