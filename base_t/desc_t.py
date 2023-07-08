@@ -62,10 +62,9 @@ def attr_get_set_t():
     class Desc:
         def __init__(self, value=20):
             self.value = value
-
         def __get__(self, instance, owner):
             print('__get__')
-            return self.value
+            return 10
 
         def __set__(self, instance, value):
             print('__set__')
@@ -75,6 +74,9 @@ def attr_get_set_t():
 
     class T:
         a = Desc()
+
+        def __init__(self):
+            self.a = -1
     t = T()
     print(f"t.a {t.a}")
     t.a = 35
@@ -246,9 +248,9 @@ if __name__ == '__main__':
     # class_obj_attr_t()
     # desc_t()
     # attr_return_t()
-    # attr_get_set_t()
+    attr_get_set_t()
     # attr_order_t()
     # func_t()
     # validate_t()
-    decor_t()
+    # decor_t()
 
