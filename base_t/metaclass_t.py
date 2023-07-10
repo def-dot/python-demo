@@ -177,5 +177,5 @@ if __name__ == "__main__":
     # class_t()
     # type_t()
     # new_t()
-    # metaclass_t()
-    call_t()
+    metaclass_t()
+    # call_t()
