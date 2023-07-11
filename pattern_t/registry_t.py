@@ -19,13 +19,18 @@ class Sub3(metaclass=Base):
     pass
 
 
-def find_inherit_from_base():
+def force_t():
+    # 查询继承了base的所有类
+    print(Sub1.__bases__)
+
+
+def optimize_t():
     # 查询继承了base的所有类
     res = Base.registries
     return res
 
 
 if __name__ == '__main__':
-    r = find_inherit_from_base()
+    # r = force_t()
+    r = optimize_t()
     print(r)
-
