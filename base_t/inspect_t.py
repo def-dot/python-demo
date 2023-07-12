@@ -1,4 +1,10 @@
 # inspect运行时检测
+# 1.类型检测和属性获取
+# 2.获取对象源码相关
+# 3.callable对象封装，对象的参数名，参数类型声明等
+# 4.class和function本身相关操作解析
+# 5.执行堆栈信息
+# 6.
 import inspect
 import os
 
@@ -72,13 +78,54 @@ class RetriveSourceCode:
         print(r)
 
 
-class SignatureT:
-    def foo(self):
+def signature_t():
+    # signature callable对象封装，对象的参数名，参数类型声明等
+    def foo(a, b: int, **kwargs):
         pass
+
+    sig = inspect.signature(foo)
+    print(str(sig))
+    print(sig.parameters)
+    print(sig.parameters['b'].annotation)
+
+
+class ClassAndFunc:
+    def class_t(self):
+        class A:
+            pass
+
+        class B(A):
+            pass
+
+        r = inspect.getclasstree([B])
+        print(r)
+
+    def func_t(self):
+        def foo(a=1, *args, **kwargs):
+            pass
+        r = inspect.getcallargs(foo)
+        print(r)
+
+
+class FrameStackT:
+    def curr_frame_test(self):
+        r = inspect.stack()
+        print(r)
+        r = inspect.trace()
+        print(r)
+        frame = inspect.currentframe()
+        try:
+            print(frame)
+        finally:
+            del frame
 
 
 if __name__ == '__main__':
     # TypeAndMembers().getmembers_t()
     # TypeAndMembers().getmodulename_t()
     # TypeAndMembers().type_t()
-    RetriveSourceCode().test()
+    # RetriveSourceCode().test()
+    # signature_t()
+    # ClassAndFunc().class_t()
+    # ClassAndFunc().func_t()
+    FrameStackT().curr_frame_test()
