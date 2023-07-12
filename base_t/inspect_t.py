@@ -72,6 +72,11 @@ class RetriveSourceCode:
         print(r)
 
 
+class SignatureT:
+    def foo(self):
+        pass
+
+
 if __name__ == '__main__':
     # TypeAndMembers().getmembers_t()
     # TypeAndMembers().getmodulename_t()

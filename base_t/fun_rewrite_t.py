@@ -1,3 +1,4 @@
+from functools import partial
 # 函数重写
 import contextlib
 
@@ -99,9 +100,26 @@ def for_t():
                 break
 
 
+def partial_t():
+    def minus(a, b):
+        return a - b
+
+    def add(a, b, c):
+        return a + b + c
+
+    # 对函数进行包装装饰，固定函数的一个或多个参数（从左到右）
+    myminus = partial(minus, 5)
+    r = myminus(2)
+    print(r)
+    myadd = partial(add, 1, 2)
+    r = myadd(2)
+    print(r)
+
+
 if __name__ == '__main__':
-    for_t()
+    # for_t()
     # with_t()
     # decor_t()
     # gen_t()
     # context_t()
+    partial_t()
