@@ -81,7 +81,7 @@ post: 4 5 2 6 7 3 1
     t3.left = t6
     t3.right = t7
 
-    r = Solution().pre_traverse_t(None)
+    r = Solution().pre_traverse_t(t1)
     print(r)
     # Solution().middle_traverse_t(t1)
     # Solution().post_traverse_t(t1)
