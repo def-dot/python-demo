@@ -1,3 +1,4 @@
+import queue
 class Tree:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -51,8 +52,26 @@ class Solution:
         post(root, res)
         return res
 
-    def level_traverse_t(self):
-        pass
+    def level_traverse_t(self, root) -> list[list[int]]:
+        res = []
+        if not root:
+            return res
+        q = [[root]]
+        while q:
+            nodes = q.pop(0)
+            next_level = []
+            curr_level = []
+            for i in nodes:
+                curr_level.append(i.val)
+                if i.left:
+                    next_level.append(i.left)
+                if i.right:
+                    next_level.append(i.right)
+            if next_level:
+                q.append(next_level)
+
+            res.append(curr_level)
+        return res
 
 
 if __name__ == '__main__':
@@ -63,6 +82,7 @@ if __name__ == '__main__':
 pre: 1 2 4 5 3 6 7
 mid: 4 2 5 1 8 6 3 7
 post: 4 5 2 6 7 3 1
+level: 1 2 3 4 5 6 7
     """
     t4 = Tree(4)
     t5 = Tree(5)
@@ -81,8 +101,9 @@ post: 4 5 2 6 7 3 1
     t3.left = t6
     t3.right = t7
 
-    r = Solution().pre_traverse_t(t1)
-    print(r)
+    # r = Solution().pre_traverse_t(t1)
+    # print(r)
     # Solution().middle_traverse_t(t1)
     # Solution().post_traverse_t(t1)
-
+    r = Solution().level_traverse_t(t1)
+    print(r)
