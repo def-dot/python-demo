@@ -73,6 +73,50 @@ class Solution:
             res.append(curr_level)
         return res
 
+    def back_traverse_t(self, root) -> list[list[int]]:
+        res = []
+        if not root:
+            return res
+        q = [[root]]
+        index = 0
+        while q:
+            nodes = q.pop(0)
+            next_level = []
+            curr_level = []
+            for i in nodes:
+                curr_level.append(i.val)
+                if i.left:
+                    next_level.append(i.left)
+                if i.right:
+                    next_level.append(i.right)
+            if next_level:
+                q.append(next_level)
+
+            if index % 2 != 0:
+                curr_level.reverse()
+            res.append(curr_level)
+            index += 1
+        return res
+
+    def deep_t(self, root) -> int:
+        if not root:
+            return 0
+        res = 0
+        q = [[root]]
+        while q:
+            res += 1
+            nodes = q.pop(0)
+            next_level = []
+            for i in nodes:
+                if i.left:
+                    next_level.append(i.left)
+                if i.right:
+                    next_level.append(i.right)
+            if next_level:
+                q.append(next_level)
+
+        return res
+
 
 if __name__ == '__main__':
     """
@@ -83,6 +127,7 @@ pre: 1 2 4 5 3 6 7
 mid: 4 2 5 1 8 6 3 7
 post: 4 5 2 6 7 3 1
 level: 1 2 3 4 5 6 7
+back: 1 3 2 4 5 6 7
     """
     t4 = Tree(4)
     t5 = Tree(5)
@@ -105,5 +150,7 @@ level: 1 2 3 4 5 6 7
     # print(r)
     # Solution().middle_traverse_t(t1)
     # Solution().post_traverse_t(t1)
-    r = Solution().level_traverse_t(t1)
+    # r = Solution().level_traverse_t(t1)
+    # r = Solution().back_traverse_t(t1)
+    r = Solution().deep_t(t1)
     print(r)

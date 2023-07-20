@@ -11,6 +11,7 @@ from common import cost
 
 
 def get_url(url):
+    raise Exception("error")
     res = requests.get(url)
     return url
 
@@ -22,9 +23,10 @@ def thread_t(urls):
     for url in urls:
         tasks.append(t.submit(get_url, url))
     done, pending = wait(tasks)  # 等待所有任务完成
+    print("hhh--------------------")
     for i in done:
-        # print(i.result())
-        pass
+        print('+++++++++')
+        print(i.result())
 
 
 @cost
@@ -102,10 +104,10 @@ def process_rw_file():
 
 
 if __name__ == "__main__":
-    urls = ["https://www.baidu.com"] * 20000
-    # thread_t(urls)  # 2.22
+    urls = ["https://www.baidu.com"] * 20
+    thread_t(urls)  # 2.22
     # thread_as_completed_t(urls)
     # process_t(urls)  # 1.16
     # sync_t(urls)  # 11.76
-    async_t(urls)  # (100 0.18)  (10000 3.85) (20000 8.08)
+    # async_t(urls)  # (100 0.18)  (10000 3.85) (20000 8.08)
     # process_rw_file()

@@ -2,6 +2,13 @@ import dis
 import configparser
 import hashlib
 import os.path
+import re
+
+
+def re_t():
+    text = ''
+    r = re.split('。|!|？', text)[0]
+    print(r)
 
 
 def hashlib_t():
@@ -34,3 +41,4 @@ if __name__ == "__main__":
     hashlib_t()
     dis_t()
     configparser_t()
+    re_t()
