@@ -169,7 +169,7 @@ class EpoolT:
                             epoll.modify(fileno, select.EPOLLOUT)
                             print(requests[fileno].decode('utf-8'))
                     elif event & select.EPOLLOUT:
-                        offset = connections[fileno].send()
+                        offset = connections[fileno].send(responses[fileno])
                         responses[fileno] = responses[fileno][offset:]
                         if responses[fileno] == '':
                             epoll.modify(fileno, 0)
