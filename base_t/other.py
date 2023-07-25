@@ -37,8 +37,25 @@ def configparser_t():
     print(r)
 
 
+def global_t():
+    print(globals()['A'])
+
+
+class A:
+    pass
+
+
+def and_t(a):
+    if a & 1:
+        print('y')
+    else:
+        print('n')
+
+
 if __name__ == "__main__":
-    hashlib_t()
-    dis_t()
-    configparser_t()
-    re_t()
+    # hashlib_t()
+    # dis_t()
+    # configparser_t()
+    # re_t()
+    # global_t()
+    and_t(1)
