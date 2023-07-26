@@ -214,6 +214,7 @@ class EpoolT:
                         try:
                             while True:  # 是否会阻塞进程？？？
                                 sock, addr = s.accept()
+                                sock.setblocking(0)
                                 connections[sock.fileno()] = sock
                                 epoll.register(sock.fileno(), select.EPOLLIN | select.EPOLLET)  # 立马可读？
                                 requests[sock.fileno()] = request
