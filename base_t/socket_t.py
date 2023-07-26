@@ -233,12 +233,119 @@ class EpoolT:
                     elif event & select.EPOLLOUT:
                         try:
                             while responses[fileno] != '':
-                                offset = connections[fileno].send(responses[fileno])
+                                offset = connections[fileno].send(responses[fileno])  # send是从用户空间到内核缓冲区，还是从内核缓冲区到网卡
                                 responses[fileno] = responses[fileno][offset:]
                         except socket.error:
                             pass
                         if responses[fileno] == '':
                             epoll.modify(fileno, select.EPOLLET)
+                            connections[fileno].shutdown(socket.SHUT_RDWR)
+                    elif event & select.EPOLLHUP:
+                        epoll.unregister(fileno)
+                        connections[fileno].close()
+                        del connections[fileno]
+        finally:
+            epoll.unregister(s.fileno())
+            epoll.close()
+            s.close()
+
+    def server_cork_t(self):
+        # 默认水平触发模式， epoll.poll(1) 可以重复读取事件（类似get），直到事件完成或事件状态改变
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind(("0.0.0.0", 9999))
+        s.listen(1)
+        s.setblocking(0)
+
+        epoll = select.epoll()
+        epoll.register(s.fileno(), select.EPOLLIN)
+
+        connections = {}
+        requests = {}
+        responses = {}
+
+        EOL1 = b'\n\n'
+        EOL2 = b'\n\r\n'
+        request = b''
+        response = b'HTTP/1.0 200 OK\r\nDate: Mon, 1 Jan 1996 01:01:01 GMT\r\n'
+        response += b'Content-Type: text/plain\r\nContent-Length: 13\r\n\r\n'
+        response += b'Hello, world!'
+
+        try:
+            while True:
+                events = epoll.poll(1)
+                for fileno, event in events:
+                    if fileno == s.fileno():
+                        sock, addr = s.accept()
+                        connections[sock.fileno()] = sock
+                        epoll.register(sock.fileno(), select.EPOLLIN)  # 立马可读？
+                        requests[sock.fileno()] = request
+                        responses[sock.fileno()] = response
+                    elif event & select.EPOLLIN:
+                        requests[fileno] += connections[fileno].recv(1024)
+                        if EOL1 in requests[fileno] or EOL2 in requests[fileno]:
+                            epoll.modify(fileno, select.EPOLLOUT)
+                            connections[fileno].setsockopt(socket.IPPROTO_TCP, socket.TCP_CORK, 1)  # 开启TCP_CORK，send时报文大小达到MSS时，才发送
+                            print(requests[fileno].decode('utf-8'))
+                    elif event & select.EPOLLOUT:
+                        offset = connections[fileno].send(responses[fileno])
+                        responses[fileno] = responses[fileno][offset:]
+                        if responses[fileno] == '':
+                            connections[fileno].setsockopt(socket.IPPROTO_TCP, socket.TCP_CORK, 0)  # 关闭TCP_CORK
+                            epoll.modify(fileno, 0)
+                            connections[fileno].shutdown(socket.SHUT_RDWR)
+                    elif event & select.EPOLLHUP:
+                        epoll.unregister(fileno)
+                        connections[fileno].close()
+                        del connections[fileno]
+        finally:
+            epoll.unregister(s.fileno())
+            epoll.close()
+            s.close()
+
+    def server_nodelay_t(self):
+        # 默认水平触发模式， epoll.poll(1) 可以重复读取事件（类似get），直到事件完成或事件状态改变
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind(("0.0.0.0", 9999))
+        s.listen(1)
+        s.setblocking(0)
+        s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+
+        epoll = select.epoll()
+        epoll.register(s.fileno(), select.EPOLLIN)
+
+        connections = {}
+        requests = {}
+        responses = {}
+
+        EOL1 = b'\n\n'
+        EOL2 = b'\n\r\n'
+        request = b''
+        response = b'HTTP/1.0 200 OK\r\nDate: Mon, 1 Jan 1996 01:01:01 GMT\r\n'
+        response += b'Content-Type: text/plain\r\nContent-Length: 13\r\n\r\n'
+        response += b'Hello, world!'
+
+        try:
+            while True:
+                events = epoll.poll(1)
+                for fileno, event in events:
+                    if fileno == s.fileno():
+                        sock, addr = s.accept()
+                        connections[sock.fileno()] = sock
+                        epoll.register(sock.fileno(), select.EPOLLIN)  # 立马可读？
+                        requests[sock.fileno()] = request
+                        responses[sock.fileno()] = response
+                    elif event & select.EPOLLIN:
+                        requests[fileno] += connections[fileno].recv(1024)
+                        if EOL1 in requests[fileno] or EOL2 in requests[fileno]:
+                            epoll.modify(fileno, select.EPOLLOUT)
+                            print(requests[fileno].decode('utf-8'))
+                    elif event & select.EPOLLOUT:
+                        offset = connections[fileno].send(responses[fileno])
+                        responses[fileno] = responses[fileno][offset:]
+                        if responses[fileno] == '':
+                            epoll.modify(fileno, 0)
                             connections[fileno].shutdown(socket.SHUT_RDWR)
                     elif event & select.EPOLLHUP:
                         epoll.unregister(fileno)
