@@ -132,7 +132,8 @@ class HttpT:
 
 
 class EpoolT:
-    def server_t(self):
+    def server_level_t(self):
+        # 默认水平触发模式， epoll.poll(1) 可以重复读取事件（类似get），直到事件完成或事件状态改变
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind(("0.0.0.0", 9999))
@@ -183,6 +184,70 @@ class EpoolT:
             epoll.close()
             s.close()
 
+    def server_edge_t(self):
+        # 边缘触发模式， epoll.poll(1) 事件只会读取一次（类似pop），所以在处理程序中，需要一次性处理完所有的数据
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind(("0.0.0.0", 9999))
+        s.listen(1)
+        s.setblocking(0)
+
+        epoll = select.epoll()
+        epoll.register(s.fileno(), select.EPOLLIN | select.EPOLLET)
+
+        connections = {}
+        requests = {}
+        responses = {}
+
+        EOL1 = b'\n\n'
+        EOL2 = b'\n\r\n'
+        request = b''
+        response = b'HTTP/1.0 200 OK\r\nDate: Mon, 1 Jan 1996 01:01:01 GMT\r\n'
+        response += b'Content-Type: text/plain\r\nContent-Length: 13\r\n\r\n'
+        response += b'Hello, world!'
+
+        try:
+            while True:
+                events = epoll.poll(1)
+                for fileno, event in events:
+                    if fileno == s.fileno():
+                        try:
+                            while True:  # 是否会阻塞进程？？？
+                                sock, addr = s.accept()
+                                connections[sock.fileno()] = sock
+                                epoll.register(sock.fileno(), select.EPOLLIN | select.EPOLLET)  # 立马可读？
+                                requests[sock.fileno()] = request
+                                responses[sock.fileno()] = response
+                        except socket.error:
+                            pass
+                    elif event & select.EPOLLIN:
+                        try:
+                            while True:
+                                requests[fileno] += connections[fileno].recv(1024)
+                        except socket.error:
+                            pass
+                        if EOL1 in requests[fileno] or EOL2 in requests[fileno]:
+                            epoll.modify(fileno, select.EPOLLOUT | select.EPOLLET)
+                            print(requests[fileno].decode('utf-8'))
+                    elif event & select.EPOLLOUT:
+                        try:
+                            while responses[fileno] != '':
+                                offset = connections[fileno].send(responses[fileno])
+                                responses[fileno] = responses[fileno][offset:]
+                        except socket.error:
+                            pass
+                        if responses[fileno] == '':
+                            epoll.modify(fileno, select.EPOLLET)
+                            connections[fileno].shutdown(socket.SHUT_RDWR)
+                    elif event & select.EPOLLHUP:
+                        epoll.unregister(fileno)
+                        connections[fileno].close()
+                        del connections[fileno]
+        finally:
+            epoll.unregister(s.fileno())
+            epoll.close()
+            s.close()
+
 
 if __name__ == "__main__":
     # BlockT().block_t()
@@ -198,4 +263,5 @@ if __name__ == "__main__":
     #     TcpT().client_t('enba')
     #     TcpT().client_t('nijiu')
     # HttpT().server_t()
-    EpoolT().server_t()
+    # EpoolT().server_level_t()
+    EpoolT().server_edge_t()
