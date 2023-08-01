@@ -117,14 +117,50 @@ class Solution:
 
         return res
 
+    head = Tree(-1)
+    p = head
+
+    def convert_to_double_link(self, root: Tree) -> Tree:
+        res = []
+        if not root:
+            return res
+
+        def middle(tree):
+            if tree.left:
+                middle(tree.left)
+
+            # t = Tree(tree.val)
+            tree.left = self.p
+            # t.left = self.p
+            self.p.right = tree
+            self.p = tree
+
+            if tree.right:
+                middle(tree.right)
+
+        def pre(tree):
+            t = Tree(tree.val)
+            t.left = self.p
+            self.p.right = t
+            self.p = t
+
+            if tree.left:
+                pre(tree.left)
+            if tree.right:
+                pre(tree.right)
+
+        pre(root)
+        # middle(root)
+        return self.head.right
+
 
 if __name__ == '__main__':
     """
          1
     2          3
 4       5   6      7
-pre: 1 2 4 5 3 6 7
-mid: 4 2 5 1 8 6 3 7
+pre: 1 2 4 5 3 6 7  == 1(l: r:2) 2(l:1 r:4) 
+mid: 4 2 5 1 6 3 7  == 4(l: r:2) 2(l:4 r:5) 5(l:2 r:1) 1(l:5 r:6) 6(l:1 r:3) 3(l:6 r:7) 7(l:3 r:)
 post: 4 5 2 6 7 3 1
 level: 1 2 3 4 5 6 7
 back: 1 3 2 4 5 6 7
@@ -152,5 +188,8 @@ back: 1 3 2 4 5 6 7
     # Solution().post_traverse_t(t1)
     # r = Solution().level_traverse_t(t1)
     # r = Solution().back_traverse_t(t1)
-    r = Solution().deep_t(t1)
-    print(r)
+    # r = Solution().deep_t(t1)
+    r = Solution().convert_to_double_link(t1)
+    while r:
+        print(r.val)
+        r = r.right
