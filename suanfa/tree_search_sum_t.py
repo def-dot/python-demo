@@ -1,3 +1,4 @@
+from typing import List
 import copy
 
 
@@ -10,27 +11,25 @@ class Tree:
 
 class Solution:
     def force_t(self, root, target):
-        res = None
         def pp(root, path=[]):
             if not root:
-                return
+                return None
+
             path.append(root.val)
 
-            if not root.left and not root.right:  # 叶子节点
-                print(sum(path))
-                if sum(path) == target:
-                    print(path)
-                    res = path
+            if not root.left and not root.right and sum(path) == target:  # 叶子节点
+                return path
 
-            if root.left:
-                pp(root.left, copy.deepcopy(path))
+            return pp(root.left, copy.deepcopy(path)) or pp(root.right, copy.deepcopy(path))
 
-            if root.right:
-                pp(root.right, copy.deepcopy(path))
+        return pp(root)
 
-        pp(root)
-
-        print(res)
+    def optimize_t(self, root: Tree, sum: int) -> bool:
+        if not root:
+            return False
+        if not root.left and not root.right and sum - root.val == 0:
+            return True
+        return self.optimize_t(root.left, sum-root.val) or self.optimize_t(root.right, sum-root.val)
 
 
 if __name__ == '__main__':
@@ -59,5 +58,6 @@ sum 8 = 1->2->5
     t3.right = t7
 
     # r = Solution().force_t(t1)
-    r = Solution().force_t(t1, 8)
+    r = Solution().force_t(t1, 9)
+    # r = Solution().optimize_t(t1, 9)
     print(r)
