@@ -1,4 +1,6 @@
-from collections import namedtuple
+import re
+import time
+from collections import namedtuple, OrderedDict, deque, defaultdict, Counter
 
 
 class NamedTupleT:
@@ -25,5 +27,59 @@ class NamedTupleT:
         print(str(t4))
 
 
+class OrderedDictT:
+    def test(self):
+        d = OrderedDict()
+        d["a"] = 1
+        d["b"] = 2
+        d["c"] = 3
+        print(f"{d}")
+        d.move_to_end("a")
+        print(f"move_to_end {d}")
+        d.popitem(0)  # 1: last  0: first
+        print(f"popitem {d}")
+
+
+class DequeT:
+    def tail(self):
+        with open("test.txt", "rb") as f:
+            r = deque(f)
+            print(f"len {len(r)}")
+            for i in r:
+                print(i.decode('utf-8'))
+            print('------------')
+            time.sleep(1)
+
+
+class DefaultDictT:
+    def test(self):
+        d = defaultdict(int)
+        a = "hello world"
+        for i in a:
+            d[i] += 1  # 默认是int类型，值为0，简化代码，自动处理None值
+            # if i not in d:
+            #     d[i] = 0
+            # d[i] += 1
+        print(d)
+
+
+class CounterT:
+    def test(self):
+        import jieba
+        content = open("test.txt", "rb").read()
+        words = jieba.cut(content)
+        r = Counter(words)
+        r = r.most_common(10)
+        print(r)
+        c = Counter(cat=4, dog=8)
+        print(c['cat'])
+        c = Counter({'cat': 4, 'dog': 8})
+        print(c['cat'])
+
+
 if __name__ == '__main__':
-    NamedTupleT().test()
+    # NamedTupleT().test()
+    # OrderedDictT().test()
+    # DequeT().tail()
+    # DefaultDictT().test()
+    CounterT().test()

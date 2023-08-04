@@ -117,41 +117,25 @@ class Solution:
 
         return res
 
-    head = Tree(-1)
-    p = head
+    head = None
+    p = None
 
     def convert_to_double_link(self, root: Tree) -> Tree:
-        res = []
         if not root:
-            return res
+            return None
 
-        def middle(tree):
-            if tree.left:
-                middle(tree.left)
+        self.convert_to_double_link(root.left)
+        if not self.head:
+            self.head = root
+            self.p = root
+        else:
+            root.left = self.p
+            self.p.right = root
+            self.p = root
 
-            # t = Tree(tree.val)
-            tree.left = self.p
-            # t.left = self.p
-            self.p.right = tree
-            self.p = tree
+        self.convert_to_double_link(root.right)
 
-            if tree.right:
-                middle(tree.right)
-
-        def pre(tree):
-            t = Tree(tree.val)
-            t.left = self.p
-            self.p.right = t
-            self.p = t
-
-            if tree.left:
-                pre(tree.left)
-            if tree.right:
-                pre(tree.right)
-
-        pre(root)
-        # middle(root)
-        return self.head.right
+        return self.head
 
 
 if __name__ == '__main__':
