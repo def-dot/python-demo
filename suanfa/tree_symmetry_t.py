@@ -104,7 +104,7 @@ class Solution:
 
             return check(l_node.left, r_node.right) and check(r_node.left, l_node.right)
 
-        return check(root.left, root.right)
+        return check(root, root)
 
 
 if __name__ == '__main__':
