@@ -1,6 +1,6 @@
 import re
 import time
-from collections import namedtuple, OrderedDict, deque, defaultdict, Counter
+from collections import namedtuple, OrderedDict, deque, defaultdict, Counter, ChainMap
 
 
 class NamedTupleT:
@@ -77,9 +77,22 @@ class CounterT:
         print(c['cat'])
 
 
+class ChainMapT:
+    def test(self):
+        a = {"a": 1, "b": 2}
+        b = {"b": 3, "c": 4}
+        # a.update(b)
+        c = ChainMap(a, b)
+        c['b'] = 5
+        print(f"c {c} {c['b']} {c['c']}")
+        print(f"a {a}")
+        print(f"b {b}")
+
+
 if __name__ == '__main__':
     # NamedTupleT().test()
     # OrderedDictT().test()
     # DequeT().tail()
     # DefaultDictT().test()
-    CounterT().test()
+    # CounterT().test()
+    ChainMapT().test()
