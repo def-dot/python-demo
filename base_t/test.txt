@@ -1,5 +1,0 @@
-如果default_factory属性为None，就报出以key作为遍历的KeyError异常；
-如果default_factory不为None，就会向给定的key提供一个默认值，这个值插入到词典中，并返回；
-如果调用default_factory报出异常，这个异常在传播时不会改变；
-这个方法是当要求的key不存在时，dict类中的getitem()方法所调用，无论它返回或者报出什么，最终返回或报出给getitem()；
-只有getitem()才能调用missing()，这意味着，如果get()起作用，如普通的词典，将会返回None作为默认值，而不是使用default_factory；
