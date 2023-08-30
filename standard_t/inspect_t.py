@@ -34,7 +34,7 @@ class TypeAndMembers:
         print(r)
         dir_path = os.path.dirname(__file__)
         print(f"dir_path {dir_path}")
-        r = inspect.getmodulename(dir_path)  # base_t
+        r = inspect.getmodulename(dir_path)  # standard_t
         print(r)
 
     def type_t(self):
@@ -56,7 +56,7 @@ class RetriveSourceCode:
         r = inspect.getdoc(T)
         print(r)
 
-        # 获取object所在file D:\code\python-demo\base_t\inspect_t.py
+        # 获取object所在file D:\code\python-demo\standard_t\inspect_t.py
         r = inspect.getfile(T)
         print(r)
 
@@ -69,7 +69,7 @@ class RetriveSourceCode:
         print(r)
 
         # 获取来源文件
-        r = inspect.getsourcefile(T)  # D:\code\python-demo\base_t\inspect_t.py
+        r = inspect.getsourcefile(T)  # D:\code\python-demo\standard_t\inspect_t.py
         print(r)
         r = inspect.getsourcelines(T)  # (['class T:\n', '    """\n', '    this is a doc test\n', '    """\n', '    def __init__(self, age):\n', '        self.age = age\n'], 7)
         print(r)

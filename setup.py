@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="python-demo",
     version="v1.0.0",
-    packages=find_packages(include=["suanfa", "suanfa.*"]),
+    packages=find_packages(include=["algorithm_t", "algorithm_t.*"]),
     install_requires=[
         "numpy",
         "pandas",

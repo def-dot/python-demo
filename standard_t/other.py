@@ -12,13 +12,13 @@ def re_t():
 
 
 def hashlib_t():
-    with open("../suanfa/array_find_once_t.py", "rb") as f:
+    with open("../algorithm_t/array_find_once_t.py", "rb") as f:
         content = f.read()
         hash_obj = hashlib.sha256()
         hash_obj.update(content)
         hash_val = hash_obj.hexdigest()
         print(hash_val)
-    r = os.path.getsize("../suanfa/array_find_once_t.py")
+    r = os.path.getsize("../algorithm_t/array_find_once_t.py")
     print(r)
 
 

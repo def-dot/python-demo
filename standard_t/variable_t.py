@@ -107,6 +107,15 @@ def thread_t():
 
 
 class DictT:
+    def max_value_t(self):
+        d = {
+            "a": 1,
+            "b": 2,
+            "c": 1
+        }
+        r = min(d, key=lambda x: d[x])
+        print(r)
+
     def test(self):
         self.dict_t()  # cost 0.04296517372131348
         self.brace_t()  # cost 0.015957355499267578  {}比dict()快三倍，通过dis查看，dict需要函数调用
@@ -207,4 +216,5 @@ if __name__ == "__main__":
     # thread_t()
     # time.sleep(5)
     # str_t()
-    dict_t()
+    # dict_t()
+    DictT().max_value_t()
