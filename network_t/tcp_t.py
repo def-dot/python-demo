@@ -5,7 +5,7 @@ from scapy.all import *
 class TcpT:
     def syn(self):
         # TCP SYN包
-        packet = IP(dst='156.232.11.125') / TCP(dport=3000, flags="S")
+        packet = IP(dst='192.168.13.236') / TCP(dport=3000, flags="S")
         response = sr1(packet, timeout=5)
         if response:
             print(response)
