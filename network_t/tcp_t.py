@@ -35,8 +35,8 @@ class TcpT:
     def src(self):
         # 构建 TCP 包
         # ip = IP(src="192.168.2.240", dst="192.168.13.236")
-        ip = IP(src="192.168.2.240", dst="156.232.11.125")
-        tcp = TCP(sport=1234, dport=3000, flags="S", seq=1000)
+        ip = IP(src="192.168.2.240", dst="220.132.204.30")
+        tcp = TCP(sport=1234, dport=554, flags="S", seq=1000)
         # 发送包
         packet = ip / tcp
 
@@ -49,6 +49,6 @@ class TcpT:
 
 
 if __name__ == "__main__":
-    TcpT().syn()
-    # TcpT().src()
+    # TcpT().syn()
+    TcpT().src()
     # TcpT().ack()
