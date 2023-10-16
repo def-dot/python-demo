@@ -3,7 +3,10 @@ import shodan
 
 class ShodanT:
     def __init__(self):
-        self.api = shodan.Shodan("SUGDxXYdnAfKHIWiOHDAzTWKL17UozTx")
+        self.api = shodan.Shodan("")
+
+    def search_cursor(self):
+        self.api.search_cursor()
 
     def search_t(self):
         try:
