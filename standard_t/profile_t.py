@@ -1,5 +1,6 @@
 """性能分析"""
 import cProfile
+from memory_profiler import profile
 
 
 def fibonacci(n):
@@ -30,5 +31,25 @@ def time_profile_t():
     profile.print_stats()
 
 
+@profile
+def memory_profile_t():
+    """
+    内存监控，按行监控
+    Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    33   20.969 MiB   20.969 MiB           1   @profile
+    34                                         def memory_profile_t():
+    35   28.602 MiB    7.633 MiB           1       a = [1] * (10 ** 6)
+    36  181.191 MiB  152.590 MiB           1       b = [2] * (2 * 10 ** 7)
+    37   28.602 MiB -152.590 MiB           1       del b
+    38   28.602 MiB    0.000 MiB           1       return a
+    """
+    a = [1] * (10 ** 6)
+    b = [2] * (2 * 10 ** 7)
+    del b
+    return a
+
+
 if __name__ == '__main__':
-    time_profile_t()
+    # time_profile_t()
+    memory_profile_t()

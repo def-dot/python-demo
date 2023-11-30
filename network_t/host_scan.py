@@ -1,3 +1,6 @@
+import ipaddress
+
+
 def arp_request_t():
     """
     arp广播请求
@@ -81,6 +84,21 @@ def ping_request_t():
     ping请求
     pdst为ip或网段
     :return:
+WARNING: Mac address to reach destination not found. Using broadcast.
+WARNING: more Mac address to reach destination not found. Using broadcast.
+WARNING: Mac address to reach destination not found. Using broadcast.
+WARNING: Mac address to reach destination not found. Using broadcast.
+存活主机: 192.168.2.1
+存活主机: 192.168.2.2
+存活主机: 192.168.2.3
+存活主机: 192.168.2.4
+存活主机: 192.168.2.5
+存活主机: 192.168.2.6
+存活主机: 192.168.2.7
+存活主机: 192.168.2.10
+存活主机: 192.168.2.11
+存活主机: 192.168.2.13
+存活主机: 192.168.2.15
     """
     from scapy.all import IP, ICMP, sr
 
@@ -100,8 +118,42 @@ def ping_request_t():
             print(f"存活主机: {ip_address}")
 
 
+def tcp_syn_request_t():
+    """
+发送tcp syn包，收到syn-ack表明端口存活
+存活主机 192.168.2.1:443
+存活主机 192.168.2.3:443
+存活主机 192.168.2.4:443
+存活主机 192.168.2.5:443
+存活主机 192.168.2.6:443
+WARNING: Mac address to rea
+    :return:
+    """
+    from scapy.all import IP, TCP, sr, sr1
+
+    # 定义目标IP地址范围（使用CIDR表示法）
+    target_ip_range = "192.168.2.0/24"
+
+    # 定义目标端口范围
+    start_port = 443
+    end_port = 443
+
+    # 发送TCP SYN包并接收响应
+    for target_ip in ipaddress.ip_network(target_ip_range):
+        for port in range(start_port, end_port + 1):
+            packet = IP(dst=str(target_ip)) / TCP(dport=port, flags="S")
+            response = sr1(packet, timeout=1, verbose=False)
+            if response:
+                if response.haslayer(TCP) and response.getlayer(TCP).flags == "SA":
+                    print(f'存活主机 {target_ip}:{port}')
+
+
+def udp_request_t():
+    pass
+
+
 if __name__ == '__main__':
     # arp_request_t()
-    ping_request_t()
-    # tcp_syn_request_t()
+    # ping_request_t()
+    tcp_syn_request_t()
     # udp_request_t()
