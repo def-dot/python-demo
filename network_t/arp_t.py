@@ -43,6 +43,26 @@ def arp_request_t():
         print(received.sprintf("MAC地址: %Ether.src%, IP地址: %ARP.psrc%"))
 
 
+def arp_brocast_request_t():
+    """
+    arp广播请求
+    pdst设为广播地址
+    :return:
+    """
+    from scapy.all import Ether, ARP, srp
+
+    # 构造 ARP 请求包
+    target_ip = "目标网络段的广播地址"
+    packet = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(op=1, pdst='192.168.2.0/24')
+
+    # 发送 ARP 请求并接收响应
+    result, unanswered = srp(packet, timeout=2, verbose=False)
+
+    # 处理响应结果
+    for sent, received in result:
+        print(received.sprintf("MAC地址: %Ether.src%, IP地址: %ARP.psrc%"))
+
+
 if __name__ == '__main__':
     # r = local_mac("192.168.2.42")
     # print(f"local_mac {r}")
@@ -50,4 +70,5 @@ if __name__ == '__main__':
     # r = remote_mac("152.32.190.242")  # arp作用于局域网，跨网络会一直等待
     # print(f"remote_mac {r}")
 
-    arp_request_t()
+    # arp_request_t()
+    arp_brocast_request_t()
