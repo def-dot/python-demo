@@ -149,11 +149,27 @@ WARNING: Mac address to rea
 
 
 def udp_request_t():
-    pass
+    from scapy.all import IP, UDP, sr1
+
+    # 定义目标IP地址范围（使用CIDR表示法）
+    target_ip_range = "192.168.2.0/24"
+
+    # 定义目标端口范围
+    start_port = 1
+    end_port = 100
+
+    # 发送UDP数据包并接收响应
+    for target_ip in ipaddress.ip_network(target_ip_range):
+        for port in range(start_port, end_port + 1):
+            packet = IP(dst=str(target_ip)) / UDP(dport=port)
+            response = sr1(packet, timeout=1, verbose=False)
+            if response:
+                if response.haslayer(UDP):
+                    print(f'存活主机 {target_ip}:{port}')
 
 
 if __name__ == '__main__':
     # arp_request_t()
     # ping_request_t()
-    tcp_syn_request_t()
-    # udp_request_t()
+    # tcp_syn_request_t()
+    udp_request_t()
