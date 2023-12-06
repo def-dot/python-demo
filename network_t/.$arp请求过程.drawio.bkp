@@ -1,0 +1,82 @@
+<mxfile host="Electron" modified="2023-12-01T01:11:04.082Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="8puIzoB_TSyii6eKDp2E" version="21.6.8" type="device">
+  <diagram name="第 1 页" id="jVDJFlQwxhr8-bKIK1bS">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-6" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="aPWIqvZ6gY7Wl4Hhx4ex-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-1" value="192.168.0.1&lt;br&gt;11-11-11-11-11-11" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="aPWIqvZ6gY7Wl4Hhx4ex-2" target="aPWIqvZ6gY7Wl4Hhx4ex-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-2" value="Switch" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-3" value="192.168.0.2&lt;br&gt;22-22-22-22-22-22" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-4" value="192.168.0.3&lt;br&gt;33-33-33-33-33-33" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-9" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=1;" edge="1" parent="1" target="aPWIqvZ6gY7Wl4Hhx4ex-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="60" as="sourcePoint" />
+            <mxPoint x="440" y="10" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-10" value="同一网段，arp请求详细过程（以192.168.0.1请求192.168.0.3 mac地址为例）：&lt;br&gt;1.192.168.0.1查询自己的arp缓存表（arp -a）是否有192.168.0.3的mac地址，若缓存中有，直接返回mac地址，否则构造arp请求包（source ip:192.168.0.1，source mac:11-11-11-11-11-11，dst ip:192.168.0.3，dst mac:255-255-255-255-255-255），其中dst mac表示广播地址，并发送&lt;br&gt;2.交换机接收到arp请求包，检查dst mac是广播地址，向除source ip(192.168.0.1)的地址广播数据包&lt;br&gt;3.192.168.0.2收到广播包，检查ip地址，发现不是发给自己的，丢弃&lt;br&gt;4.192.168.0.3收到广播包，检查ip地址，发现是发给自己的，构造arp响应包（source ip:192.168.0.3, source mac:33-33-33-33-33-33，dst ip:192.168.0.1，dst mac:11-11-11-11-11-11）&lt;br&gt;5.交换机收到arp响应包，检查dst mac地址，从对应的端口发出去。&lt;br&gt;6.192.168.0.1收到arp响应包，将192.168.0.3的mac地址存入自己的arp缓存表。" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="280" width="630" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-11" value="1.发送arp请求" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-45;" vertex="1" parent="1">
+          <mxGeometry x="130" y="110" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-12" value="2.广播arp请求包" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="130" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-13" value="2.广播arp请求包" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="450" y="120" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-14" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.7;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="aPWIqvZ6gY7Wl4Hhx4ex-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="354" y="190" as="sourcePoint" />
+            <mxPoint x="400" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-16" value="X" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="aPWIqvZ6gY7Wl4Hhx4ex-14">
+          <mxGeometry x="-0.25" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-17" value="3.丢弃" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="130" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-18" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="aPWIqvZ6gY7Wl4Hhx4ex-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620" y="190" as="sourcePoint" />
+            <mxPoint x="670" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-19" value="4.发送arp响应包" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="510" y="100" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-20" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="aPWIqvZ6gY7Wl4Hhx4ex-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="290" y="70" as="sourcePoint" />
+            <mxPoint x="240" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aPWIqvZ6gY7Wl4Hhx4ex-21" value="5.发送arp响应包" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="200" y="140" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

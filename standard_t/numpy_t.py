@@ -1,7 +1,12 @@
+import datetime
+
 import numpy as np
+import datetime
 
 
 def base_t():
+    r = datetime.datetime.now()
+    print(r)
     # 对角矩阵
     d = np.eye(4)
     print(f"eys {d}")

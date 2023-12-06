@@ -69,7 +69,7 @@ MAC地址: 18:c0:4d:3e:0d:df, IP地址: 192.168.2.251
 
     # 构造 ARP 请求包
     target_ip = "目标网络段的广播地址"
-    packet = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(op=1, pdst='192.168.2.0/24')
+    packet = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(op=1, pdst='192.168.2.200')
 
     # 发送 ARP 请求并接收响应
     result, unanswered = srp(packet, timeout=2, verbose=False)
@@ -169,7 +169,7 @@ def udp_request_t():
 
 
 if __name__ == '__main__':
-    # arp_request_t()
+    arp_request_t()
     # ping_request_t()
     # tcp_syn_request_t()
-    udp_request_t()
+    # udp_request_t()

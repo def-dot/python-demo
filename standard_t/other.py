@@ -1,3 +1,4 @@
+import datetime
 import dis
 import configparser
 import hashlib
@@ -52,10 +53,18 @@ def and_t(a):
         print('n')
 
 
+def date_t():
+    r = datetime.datetime.now()
+    print(r)
+    return r
+
+
 if __name__ == "__main__":
     # hashlib_t()
     # dis_t()
     # configparser_t()
     # re_t()
     # global_t()
-    and_t(1)
+    # and_t(1)
+    date_t()
+

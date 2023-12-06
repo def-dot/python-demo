@@ -358,7 +358,7 @@ class EpoolT:
 
 
 if __name__ == "__main__":
-    # BlockT().block_t()
+    BlockT().block_t()
     # BlockT().nonblock_t()
     # if sys.argv[1] == 'server':
     #     TcpT().server_t()
@@ -372,4 +372,4 @@ if __name__ == "__main__":
     #     TcpT().client_t('nijiu')
     # HttpT().server_t()
     # EpoolT().server_level_t()
-    EpoolT().server_edge_t()
+    # EpoolT().server_edge_t()
