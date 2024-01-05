@@ -9,7 +9,7 @@ class SocketT:
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         # 服务器地址和端口
-        server_address = ('45.156.109.47', 11211)
+        server_address = ('45.156.109.47', 11111)
 
         # 发送数据到服务器
         message = 'stats'

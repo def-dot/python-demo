@@ -5,14 +5,14 @@ import time
 def func1():
     while True:
         print("func1")
-        time.sleep(10)
-        break
+        time.sleep(1)
 
 
 def func2():
     while True:
-        print("func2")
-        time.sleep(10)
+        # print("func2")
+        # time.sleep(10)
+        pass
 
 
 thread_1 = threading.Thread(target=func1)
