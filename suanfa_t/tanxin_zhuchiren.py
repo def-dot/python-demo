@@ -12,8 +12,6 @@ class Solution:
             end.append(t[1])
         start.sort()
         end.sort()
-        print(start)
-        print(end)
         r = 0
         j = 0
         for i in range(len(nums)):

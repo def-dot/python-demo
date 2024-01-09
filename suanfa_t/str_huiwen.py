@@ -1,4 +1,4 @@
-# 回文字符串检测
+# 回文字符串检测（双指针）
 class Solution:
     def check(self, val):
         left = 0
