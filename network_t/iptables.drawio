@@ -1,0 +1,92 @@
+<mxfile host="Electron" modified="2024-03-13T10:18:35.861Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.16 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="raSL5TCK9Py6Tp6mZjjm" version="22.1.16" type="device">
+  <diagram name="第 1 页" id="CbcC-X0U3o3dmQMUctZw">
+    <mxGraphModel dx="1098" dy="828" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-1" value="网卡" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="170" y="107" width="480" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-3" target="Tf5ANU7W_X3ITb1nIYKW-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-3" value="数据包" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="142" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-4" target="Tf5ANU7W_X3ITb1nIYKW-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-4" value="Prerouting&lt;br&gt;(nat、mangle、raw)" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="127" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-6" target="Tf5ANU7W_X3ITb1nIYKW-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-6" target="Tf5ANU7W_X3ITb1nIYKW-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-6" value="目的地址是否本机IP" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="232" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-10" target="Tf5ANU7W_X3ITb1nIYKW-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-10" value="Input&lt;br&gt;（filter、mangle）" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="337" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-12" value="是" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="307" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-13" target="Tf5ANU7W_X3ITb1nIYKW-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-13" value="进程" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="352" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="207" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-15" value="Output&lt;br&gt;（filter、nat、mangle、raw）" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="337" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-17" target="Tf5ANU7W_X3ITb1nIYKW-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-17" value="Outrouting&lt;br&gt;（nat、mangle、raw）" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="127" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.167;entryY=0.875;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Tf5ANU7W_X3ITb1nIYKW-18" target="Tf5ANU7W_X3ITb1nIYKW-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="207" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-18" value="Forward&lt;br&gt;（filter、mangle）" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="232" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-20" value="否" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="247" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-25" value="数据包" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="17" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-27" value="物理链路" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="77" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-28" value="物理链路" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="137" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-29" value="接收" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="347" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-30" value="发送" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="440" y="347" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Tf5ANU7W_X3ITb1nIYKW-33" value="nat：改源/目标IP地址，还可以用来实现负载均衡。Prerouting、Output、Postrouting链路支持。&lt;br&gt;&lt;br&gt;mangle：修改数据包IP header中的TTL（跳转存活时间）、TOS（服务类型，如最小延迟、最大吞吐、最高可靠性、最小成本）；数据包打标记（remark，打的标记是放在内核中的连接追踪表中）。所有链路都支持mangle操作&lt;br&gt;&lt;br&gt;filter:过滤，支持-p（协议，如TCP/UDP/ICMP），-s（源地址），-d（目标地址）,-i（网络接口），-sport（源端口），-dport（目的端口）,-i（网络接口）。Input、Output、Forward链路支持。&lt;br&gt;&lt;br&gt;raw：数据包进入协议栈之前做一些简单的过滤？（不理解），Prerouting、Output、Postrouting链路支持&lt;br&gt;&lt;br&gt;" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="480" width="450" height="190" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

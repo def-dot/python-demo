@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: python-demo
+Version: 1.0.0
+Summary: python build program
+Home-page: http://www.example.com
+Author: sjj
+Author-email: sjj@test.com
+License: BSD
+Provides-Extra: dev
+Provides-Extra: test

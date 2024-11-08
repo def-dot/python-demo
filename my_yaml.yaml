@@ -1,0 +1,319 @@
+packet_info:
+  attention_file:
+  - ts_iot_sams.ko
+  attention_md5sum:
+  - ts_iot_sams.ko: e4b0e9f361ed0fe618b4be801295a23d
+  create_time: 2023-12-18 09:40:48
+  record:
+  - 增加流量中http的解析ip到dev
+  - SNMP检查mac重复的问题
+  - 11-2 更换ts_iot_sams.ko(11-02)；set_route的安装错误；analysis_flow的问题
+  - 11-3 增加安装net_evt.ko; center-core-server flow 保存结果bug
+  - 11-4 manager_scan的内存泄漏问题；
+  - 11-9 众多bug修改打包-1.3.6.1
+  - 11-11 增加级联管控功能
+  - 11-12 往期bug修复
+  - 11-15 修改流量解析bug; 修改注册助手下载判断流
+  - 11-16 增加助手上报消息（显卡）;
+  - 11-18 修改helper资产范围过滤;helper详情改善
+  - 11-22 分组指定助手版本
+  - 01-16 地址管理优化，权限bug解决，关闭资产地址管理页面
+  - 2022-12-29 可以config.yaml指定扫描的探针
+  - 2023-02-02 优化IP规划的详情展示
+  - 2023-02-11 查漏补缺，i在线判定时间延迟
+  - 2023-02-23 资产扫描结果解析模块整理
+  - '-------------------------------'
+  - 2023-03-14 NAC1.41更新内容
+  - 1.新增IP地址、IP规划管理页面（分黄石和其他地区）；
+  - 2.IP规划同名业务导入分组错误，BUG修复；
+  - 3.IP规划新增导出功能；
+  - 4.IP规划新增移动分组功能；
+  - '-------------------------------'
+  - 2023-03-20 NAC1.4.2更新内容
+  - 1.首页-资产分析：去掉打印机、移动设备、新增其他类型（其他类型可以跳转资产列表）
+  - 2.资产管理：新增批量修改资产类型
+  - 3.终端管理：列表仅展示安装助手的终端；顶部看板新增已注册和未注册终端数量；
+  - 4.准控策略选择需要安装助手，重定向页面只显示欢迎页和下载助手，不会跳转注册页面；
+  - '-------------------------------'
+  - 2023-03-27 NAC1.4.2.1更新内容
+  - NAC管理中心1.4.2.1
+  - 1.首页-资产阻断提示：改为阻断top10，点击详情进入阻断日志；
+  - 2.首页探针设备、流量引擎状态：吞吐量KB/MB/GB随流量自动换算；
+  - 3.资产管理：新增资产离线时间字段，并提供筛选离线时间；
+  - 4.资产管理：新增责任人、描述搜索；
+  - 5.资产管理：列表可选择展示描述；
+  - 6.准入控制-阻断日志：新增阻断日志；
+  - 7.终端管理：新增终端离线时间字段，并提供筛选离线时间；
+  - 8.终端管理：新增安装时间字段；
+  - '-------------------------------'
+  - 2023-04-14 NAC1.4.2.2更新内容
+  - 1.修改保存日志修改为186天
+  - 2.在离线定时任务的优化
+  - 3.助手过滤127.0.0.1这个异常ip
+  - '-------------------------------'
+  - 2023-04-23 NAC1.4.3更新内容
+  - 1.mac仿冒功能
+  - '-------------------------------'
+  - 2023-05-26 NAC1.4.3.1更新内容
+  - 1.增加ping扫描功能，每2分钟扫描一次
+  - 2.新增资产删除功能
+  - 3.资产地址管理后端接口优化
+  - '-------------------------------'
+  - 2023-08-04 NAC1.4.4.0更新内容
+  - 1.增加了资产分离
+  - 2.级联迁移功能
+  - '-------------------------------'
+  - 2023-08-24 NAC1.4.5.0更新内容
+  - 1.设备阻断功能全部调整为双向阻断
+  - 2.黄石准入资产列表中离线时间连续一个月的资产需要清除
+  - 3.黄石准入佳都库对接资产实时性需要优化
+  - 4.佳都库未建档、停用、报废、故障设备自动阻断，运行正常审核通过的资产放行
+  - '-------------------------------'
+  - 2023-09-13 NAC1.4.6.0更新内容
+  - 1.资产删除功能
+  - 2.助手分组策略管理
+  - 3.第三方软件管理
+  - '-------------------------------'
+  - 2023-11-03 NAC1.4.6.1更新内容
+  - 1.资产列表、可控资产、用户信息、终端信息导出助手信息同步
+  - '-------------------------------'
+  - 2023-12-10  NAC1.4.7.0更新内容
+  - 1.新增usb管控功能
+  - 2.修复助手列表不显示用户注册信息问题
+  - 3.资产创建时间改变问题
+  - 4.助手分组全选问题
+  - 5.snmp兼容v3版本
+  release_file: /yihnac/release.yaml
+  upgrade_func: ''
+  version: v1.4.7.0
+parent:
+  dest_dir: yihnac-release-1.4.7.0-install
+  install_post_cmd: ''
+  install_pre_cmd: unlink /lib64/libcrypto.so.1.1;ln /lib64/libcrypto.so.1.1.1g /lib64/libcrypto.so.1.1;mkdir
+    -p /yihnac
+  packet_name: yihnac-release-1.4.7.0-install
+  packet_post_cmd: rm -rf dist/yihnac-release-1.4.7.0-install
+  packet_pre_cmd: ''
+  verify:
+  - fix: ''
+    match_not: exit
+    match_result: '4.18.0-305.19.1.el8_4.x86_64 #1 SMP Wed Sep 15 15:39:39 UTC 2021
+      x86_64 x86_64 x86_64 GNU/Linux'
+    type: os
+sub:
+- dest_dir: base_rpm_s
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: base rpms
+  packet_type: other
+  serial: 1
+  source: /home/install-packet/yihnac/rpms
+  source_type: cp
+  status: 'on'
+- dest_dir: clib
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: clib
+  packet_type: other
+  serial: 1
+  source: /home/install-packet/yihnac/clib
+  source_type: cp
+  status: 'on'
+- dest_dir: kernel_ko
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: kernel-ko
+  packet_type: other
+  serial: 1
+  source: /home/install-packet/yihnac/kernel_ko
+  source_type: cp
+  status: 'on'
+- dest_dir: supervisor
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: supervisor
+  packet_type: other
+  serial: 2
+  source: /home/install-packet/yihnac/supervisor
+  source_type: cp
+  status: 'on'
+- dest_dir: postgres-13
+  install_cmd: sudo ./install.sh
+  install_post: ignore
+  name: postgres-13
+  packet_type: other
+  serial: 2
+  source: /home/install-packet/yihnac/postgresql
+  source_type: cp
+  status: 'on'
+- dest_dir: python38
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: python38
+  packet_type: other
+  serial: 2
+  source: /home/install-packet/yihnac/python38
+  source_type: cp
+  status: 'on'
+- dest_dir: nginx
+  install_cmd: sudo ./install.sh
+  install_post: ignore
+  name: nginx
+  packet_type: other
+  serial: 3
+  source: /home/install-packet/yihnac/nginx
+  source_type: cp
+  status: 'on'
+- dest_dir: database_center
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: database_center
+  packet_type: other
+  serial: 4
+  source: /home/install-packet/yihnac/db_center
+  source_type: cp
+  status: 'on'
+- dest_dir: database_probe
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: database_probe
+  packet_type: other
+  serial: 4
+  source: /home/install-packet/yihnac/db_probe
+  source_type: cp
+  status: 'on'
+- dest_dir: redis
+  install_cmd: sudo ./install.sh
+  install_post: ignore
+  name: redis
+  packet_type: other
+  serial: 5
+  source: /home/install-packet/yihnac/redis
+  source_type: cp
+  status: 'on'
+- dest_dir: sysconfig
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: sysconfig
+  packet_type: other
+  serial: 5
+  source: /home/install-packet/yihnac/sysconfig
+  source_type: cp
+  status: 'on'
+- dest_dir: winpatch
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: winpatch
+  packet_type: other
+  serial: 6
+  source: /home/install-packet/yihnac/winpatch/
+  source_type: cp
+  status: 'on'
+- dest_dir: pip_s
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: pip_s
+  packet_type: other
+  serial: 6
+  source: /home/install-packet/yihnac/pip_s
+  source_type: cp
+  status: 'on'
+- dest_dir: web-center
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: web-center
+  packet_type: other
+  serial: 6
+  source: /home/install-packet/yihnac/web-center
+  source_type: cp
+  status: 'on'
+- dest_dir: web-probe
+  install_cmd: ./install.sh
+  install_post: ignore
+  name: web-probe
+  packet_type: other
+  serial: 6
+  source: /home/install-packet/yihnac/web-probe
+  source_type: cp
+  status: 'on'
+- dest_dir: center-web-server
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: center-web-server
+  packet_type: other
+  serial: 7
+  source: root@192.168.13.234:yihnac/center-web-server.git@v1.4.7.0
+  source_type: git
+  status: 'on'
+- dest_dir: center-core-sham
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: center-core-sham
+  packet_type: other
+  serial: 7
+  source: root@192.168.13.234:yihnac/YIHNAC-center-core-sham.git@v1.0.0.0
+  source_type: git
+  status: 'on'
+- dest_dir: center-web-etl
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: center-web-etl
+  packet_type: other
+  serial: 7
+  source: root@192.168.13.234:yihnac/center-web-etl.git@v1.3.9.0
+  source_type: git
+  status: 'on'
+- dest_dir: probe-web-server
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: probe-web-server
+  packet_type: other
+  serial: 7
+  source: root@192.168.13.234:yihnac/prober-web-server.git@v1.3.8.0
+  source_type: git
+  status: 'on'
+- dest_dir: center-core-server
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: center-core-server
+  packet_type: other
+  serial: 8
+  source: root@192.168.13.234:yihnac/center-core-server.git@v1.4.7.0
+  source_type: git
+  status: 'on'
+- dest_dir: probe-core-server
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: probe-core-server
+  packet_type: other
+  serial: 9
+  source: root@192.168.13.234:yihnac/prober-core-server.git@v1.3.8.3
+  source_type: git
+  status: 'on'
+- dest_dir: analysis_flow
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: analysis_flow
+  packet_type: other
+  serial: 9
+  source: root@192.168.13.234:zhankaibin/analysis_flow.git@v1.3.8.0
+  source_type: git
+  status: 'on'
+- dest_dir: set_route
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: set-route
+  packet_type: other
+  serial: 10
+  source: /home/install-packet/yihnac/set_route
+  source_type: cp
+  status: 'off'
+- dest_dir: tool
+  install_cmd: chmod +x install.sh;./install.sh
+  install_post: ignore
+  name: tool
+  packet_type: other
+  serial: 99
+  source: /home/install-packet/yihnac/tool
+  source_type: cp
+  status: 'on'

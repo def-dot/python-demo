@@ -13,5 +13,5 @@ def my_callback(packet):
 
 if __name__ == '__main__':
     my_filter = "dst 47.116.71.190"
-    packets = sniff(filter=my_filter, prn=my_callback, count=5)
+    packets = sniff(filter=my_filter, prn=my_callback, count=1000)
     wrpcap("data.pcap", packets)
