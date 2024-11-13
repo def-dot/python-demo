@@ -1,3 +1,6 @@
+"""
+langchain 返回结构化数据
+"""
 from typing import Optional
 
 from pydantic import BaseModel, Field
