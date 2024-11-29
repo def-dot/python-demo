@@ -30,10 +30,8 @@ def python_repl_tool(
     except BaseException as e:
         return f"Failed to execute. Error: {repr(e)}"
     result_str = f"Successfully executed: python {code} Stdout: {result}"
-    return (
-        result_str + "\n\nIf you have completed all tasks, respond with FINAL ANSWER."
-    )
-
+    return result_str
+        
 def make_system_prompt(suffix: str) -> str:
     return (
         "You are a helpful AI assistant, collaborating with other assistants."
@@ -90,42 +88,3 @@ def router(state: MessagesState):
     if "FINAL ANSWER" in last_message.content:
         return END
     return "continue"
-
-
-workflow = StateGraph(MessagesState)
-workflow.add_node("researcher", research_node)
-workflow.add_node("chart_generator", chart_node)
-
-workflow.add_conditional_edges(
-    "researcher",
-    router,
-    {"continue": "chart_generator", END: END},
-)
-workflow.add_conditional_edges(
-    "chart_generator",
-    router,
-    {"continue": "researcher", END: END},
-)
-
-workflow.add_edge(START, "researcher")
-graph = workflow.compile()
-
-img_data = graph.get_graph().draw_mermaid_png()
-with open('graph_image.png', 'wb') as f:
-    f.write(img_data)
-
-events = graph.stream(
-    {
-        "messages": [
-            (
-                "user",
-                "First, get the UK's GDP over the past 5 years, then make a line chart of it with excel. "
-                "Once you make the chart, finish.",
-            )
-        ],
-    },
-    {"recursion_limit": 150},
-)
-for s in events:
-    print(s)
-    print("----")
