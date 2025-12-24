@@ -1,0 +1,99 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0" version="28.2.9">
+  <diagram name="第 1 页" id="-x42pr5OYqFGkqqOyyAg">
+    <mxGraphModel dx="1418" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-1" target="NsPO2FHoDI5Ov5ZkTRZG-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-1" value="查询文本" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-3" target="NsPO2FHoDI5Ov5ZkTRZG-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-8" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NsPO2FHoDI5Ov5ZkTRZG-7">
+          <mxGeometry x="-0.507" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-3" target="NsPO2FHoDI5Ov5ZkTRZG-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-11" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NsPO2FHoDI5Ov5ZkTRZG-10">
+          <mxGeometry x="-0.1143" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-3" value="是否需要检索文档" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="255" y="230" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="440" y="1140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-5" value="生成：LLM自生成答案" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="1030" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-9" target="NsPO2FHoDI5Ov5ZkTRZG-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-9" value="检索：混合检索&lt;div&gt;（TOP-K结果）&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-12" target="NsPO2FHoDI5Ov5ZkTRZG-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-12" value="过滤：LLM判断每个结果是否和问题真正相关&lt;div&gt;（过滤结果）&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="500" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-15" target="NsPO2FHoDI5Ov5ZkTRZG-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-19" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NsPO2FHoDI5Ov5ZkTRZG-18">
+          <mxGeometry x="-0.5022" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-15" target="NsPO2FHoDI5Ov5ZkTRZG-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-23" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NsPO2FHoDI5Ov5ZkTRZG-22">
+          <mxGeometry x="-0.4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-15" value="过滤结果不为空" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="255" y="610" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-20" target="NsPO2FHoDI5Ov5ZkTRZG-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-20" value="生成：根据过滤结果集，生成多个候选答案" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="770" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-21" target="NsPO2FHoDI5Ov5ZkTRZG-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-21" value="自评估：每个候选答案是否有依据，哪些是自生成的" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="900" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NsPO2FHoDI5Ov5ZkTRZG-25" target="NsPO2FHoDI5Ov5ZkTRZG-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-25" value="打分：每个候选答案分数" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="1030" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NsPO2FHoDI5Ov5ZkTRZG-27" value="结束" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1140" width="120" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

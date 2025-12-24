@@ -1,50 +1,70 @@
-from langchain_ollama.llms import OllamaLLM
-from langchain_core.messages import HumanMessage, AIMessage
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-
-from langgraph.checkpoint.memory import MemorySaver
-from langgraph.graph import START, MessagesState, StateGraph
-from typing_extensions import Annotated, TypedDict
-from typing import Sequence
-
-from langchain_core.messages import BaseMessage
-from langgraph.graph.message import add_messages
-
-
-class State(TypedDict):
-    messages: Annotated[Sequence[BaseMessage], add_messages]
-    language: str
-
-
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "尽可能简短回答，用{language}"),
-    MessagesPlaceholder(variable_name="messages")
-])
-
-model = OllamaLLM(model="qwen2.5:7b")
-
-
-def call_model(state: State):
-    chain = prompt | model
-    r = chain.invoke(state)
-    return {"messages": r}
-    
-workflow = StateGraph(state_schema=State)
-workflow.add_edge(START, "model")
-workflow.add_node("model", call_model)
-
-mem = MemorySaver()
-app = workflow.compile(checkpointer=mem)
-
-config = {"configurable": {"thread_id": "zhangsan"}}
-
-input_messages = [HumanMessage("讲一个笑话，200字内")]
-for chunk, metadata in app.stream({"messages": input_messages, "language": "英文"}, config, stream_mode="messages"):
-    if isinstance(chunk, AIMessage):
-        print(chunk.content, end="|")
-
-# output = app.invoke({"messages": HumanMessage("讲一个笑话，200字内"), "language": "英文"}, config)
-# output["messages"][-1].pretty_print()
-
-# output = app.invoke({"messages": HumanMessage("我是谁？")}, config)
-# output["messages"][-1].pretty_print()
+{
+    "value": 2.217437,
+    "description": "sum of:",
+    "details": [
+    {
+        "value": 2.217437,
+        "description": "weight(content_ltks:秀才 in 2) [PerFieldSimilarity], result of:",
+        "details": [
+        {
+            "value": 2.217437,
+            "description": "score(freq=4.0), computed as boost * idf * tf from:",
+            "details": [
+            {
+                "value": 2.2,
+                "description": "boost",
+                "details": []
+            },
+            {
+                "value": 1.2953225,
+                "description": "idf, computed as log(1 + (N - n + 0.5) / (n + 0.5)) from:",
+                "details": [
+                {
+                    "value": 11,
+                    "description": "n, number of documents containing term",
+                    "details": []
+                },
+                {
+                    "value": 41,
+                    "description": "N, total number of documents with field",
+                    "details": []
+                }
+                ]
+            },
+            {
+                "value": 0.7781274,
+                "description": "tf, computed as freq / (freq + k1 * (1 - b + b * dl / avgdl)) from:",
+                "details": [
+                {
+                    "value": 4.0,
+                    "description": "freq, occurrences of term within document",
+                    "details": []
+                },
+                {
+                    "value": 1.2,
+                    "description": "k1, term saturation parameter",
+                    "details": []
+                },
+                {
+                    "value": 0.75,
+                    "description": "b, length normalization parameter",
+                    "details": []
+                },
+                {
+                    "value": 200.0,
+                    "description": "dl, length of field (approximate)",
+                    "details": []
+                },
+                {
+                    "value": 214.14635,
+                    "description": "avgdl, average length of field",
+                    "details": []
+                }
+                ]
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}

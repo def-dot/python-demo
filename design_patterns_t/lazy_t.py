@@ -1,3 +1,53 @@
+"""
+惰性加载设计模式
+1. from functools import cached_property
+```
+from functools import cached_property
+import time
+
+class DatabaseConnector:
+    def __init__(self):
+        print("初始化对象...")
+
+    @cached_property
+    def connection(self):
+        print("正在建立耗时的数据库连接...")
+        time.sleep(2)  # 模拟耗时操作
+        return "Connected_to_DB"
+
+# 测试
+db = DatabaseConnector()
+print("对象已创建，但连接尚未建立。")
+print(f"第一次访问: {db.connection}")  # 触发计算
+print(f"第二次访问: {db.connection}")  # 直接从缓存读取，不打印“建立连接”
+```
+2. @property
+```
+class BigDataModel:
+    def __init__(self):
+        self._data = None
+
+    @property
+    def data(self):
+        if self._data is None:
+            print("正在从硬盘加载大数据...")
+            self._data = [i for i in range(1000000)]
+        return self._data
+
+model = BigDataModel()
+# 此时 model.data 还是 None，内存占用低
+```
+3. 延迟导入
+```
+def process_image(path):
+    # 只有调用此函数时，才会加载重量级的 PIL 库
+    from PIL import Image
+    img = Image.open(path)
+    # ... 处理逻辑
+```
+"""
+
+
 def calc_t():
     # 多次计算
     class Circle:
