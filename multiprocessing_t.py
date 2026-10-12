@@ -1,35 +1,26 @@
-import multiprocessing
-import threading
+from multiprocessing import Process, Manager
 
+def worker(shared_dict, shared_list, index):
+    # 修改共享字典
+    shared_dict[index] = f"任务 {index} 已完成"
+    # 修改共享列表
+    shared_list.append(index)
 
-# queue = multiprocessing.Queue()
+if __name__ == "__main__":
+    # 使用 with 语句可以确保 Manager 进程在结束后自动关闭
+    with Manager() as manager:
+        # 创建共享的字典和列表
+        d = manager.dict()
+        l = manager.list()
 
+        processes = []
+        for i in range(5):
+            p = Process(target=worker, args=(d, l, i))
+            p.start()
+            processes.append(p)
 
-def worker(queue):
-    print(f"worker {id(queue)}")
-    data = queue.get()
-    print(f'worker get {data}')
+        for p in processes:
+            p.join()
 
-
-def multiprocessing_t():
-    queue = multiprocessing.Queue()
-    print(f"main {id(queue)}")
-    queue.put("test")
-    process = multiprocessing.Process(target=worker, args=(queue,))
-    process.start()
-    process.join()
-
-
-def thread_t():
-    queue = multiprocessing.Queue()
-    print(f"main {id(queue)}")
-    queue.put("test")
-    thread = threading.Thread(target=worker, args=(queue,))
-    thread.start()
-    thread.join()
-
-
-if __name__ == '__main__':
-    multiprocessing_t()
-    # thread_t()
-    print('over')
+        print("共享字典:", d)
+        print("共享列表:", l)

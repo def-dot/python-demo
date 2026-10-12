@@ -1,44 +1,20 @@
+import time
 
-DETECTRON2_ONNX_MODEL_TYPES = {
-    "detectron2_onnx": dict(
-        model_path="",
-        label_map="",
-        confidence_threshold=0.8,
-    ),
-    "detectron2_quantized": {
-        "model_path": "",
-        "label_map": "",
-        "confidence_threshold": 0.8,
-    }
-}
+line = "Thu Mar 19 15:16:25 2026 0 192.168.2.67 6 test.txt b - o u test1@192.168.2.159 ftp 1 test1@192.168.2.159 c"
+parts = line.strip().split()
 
-YOLOX_MODEL_TYPES = {
-    "yolox": dict(
-        model_path="",
-        label_map="",
-    ),
-    "yolox_tiny": dict(
-        model_path="",
-        label_map="",
-    )
-}
+# 1. 提取前 5 个字段并拼接
+time_str = " ".join(parts[:5])
 
+# 2. 定义格式化字符串
+# %a: 星期, %b: 月份简写, %d: 日期, %H:%M:%S: 时间, %Y: 年份
+time_format = "%a %b %d %H:%M:%S %Y"
 
-class UnstructuredDetectronONNXModel:
-    pass
+# 3. 转换为时间元组 (Time Tuple)
+time_struct = time.strptime(time_str, time_format)
 
+# 4. 转换为时间戳 (Timestamp)
+timestamp = int(time.mktime(time_struct))
 
-class UnstructuredYoloXModel:
-    pass
-
-
-def get_default_model_mappings():
-    """default model mappings for models that are in `unstructured_inference` repo"""
-    return {
-        **dict.fromkeys(DETECTRON2_ONNX_MODEL_TYPES, UnstructuredDetectronONNXModel),
-        **dict.fromkeys(YOLOX_MODEL_TYPES, UnstructuredYoloXModel),
-    }, {**DETECTRON2_ONNX_MODEL_TYPES, **YOLOX_MODEL_TYPES}
-
-
-r = get_default_model_mappings()
-print(r)
+print(f"原始字符串: {time_str}")
+print(f"Unix 时间戳: {timestamp}")
